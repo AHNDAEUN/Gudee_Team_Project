@@ -1,6 +1,9 @@
 package com.goodee.market.member;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class MemberDTO {
 	
@@ -11,10 +14,14 @@ public class MemberDTO {
 	private String nickname;
 	private String email;
 	private String phone;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date joinDate;
 	private Long cash;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 	private String address;
+	private String postcode;
+	private MemberFileDTO memberFileDTO;
 	
 	public Long getMemberNum() {
 		return memberNum;
@@ -82,4 +89,21 @@ public class MemberDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	public MemberFileDTO getMemberFileDTO() {
+		return memberFileDTO;
+	}
+	public void setMemberFileDTO(MemberFileDTO memberFileDTO) {
+		this.memberFileDTO = memberFileDTO;
+	}
+	public String getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	
+	
+	
+	
 }

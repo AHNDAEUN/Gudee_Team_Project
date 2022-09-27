@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		    
+<mapper namespace="com.goodee.market.meetingboard.MeetingBoardDAO">
+
+	<delete id="setMeetingBoardDelete" parameterType="MeetingBoardDTO">
+		DELETE FROM meetingboard WHERE meetingboardnum = #{meetingBoardNum}
+	</delete>
+
+	<update id="setMeetingBoardUpdate" parameterType="MeetingBoardDTO">
+		UPDATE meetingboard SET meetingboardtitle = #{meetingBoardTitle},
+		meetingboardcontents = #{meetingBoardContents},
+		meetingboardduedate = #{meetingBoardDueDate},
+		meetingboardtotalcost = #{meetingBoardTotalCost},
+		meetingboardlocation = #{meetingBoardLocation},
+		meetingboardmaxmember = #{meetingBoardMaxMember},
+		meetingboardcategory = #{meetingBoardCategory},
+		meetingboardhostdemand = #{meetingBoardHostDemand}
+		WHERE meetingboardnum = #{meetingBoardNum}
+	</update>
+
+	<select id="getMeetingBoardDetail" parameterType="MeetingBoardDTO" resultMap="getDetailResult">
+		SELECT MB.*, M.*, MBI.filenum, MBI.filename
+		FROM MEETINGBOARD MB
+		INNER JOIN MEMBER M
+		ON(MB.meetingboardwriter = M.membernum)
+		LEFT JOIN MEETINGBOARDIMAGE MBI
+		ON(MB.meetingboardnum = MBI.meetingboardnum)
+		WHERE MB.meetingboardnum = #{meetingBoardNum}
+	</select>
+	
+	<resultMap type="MeetingBoardDTO" id="getDetailResult">
+		<id column="MEETINGBOARDNUM" property="meetingBoardNum"/>
+		<result column="MEETINGBOARDWRITER" property="meetingBoardWriter"/>
+		<result column="MEETINGBOARDTITLE" property="meetingBoardTitle"/>
+		<result column="MEETINGBOARDCONTENTS" property="meetingBoardContents"/>
+		<result column="MEETINGBOARDDUEDATE" property="meetingBoardDueDate"/>
+		<result column="MEETINGBOARDTOTALCOST" property="meetingBoardTotalCost"/>
+		<result column="MEETINGBOARDLOCATION" property="meetingBoardLocation"/>
+		<result column="MEETINGBOARDCURRENTMEMBER" property="meetingBoardCurrentMember"/>
+		<result column="MEETINGBOARDMAXMEMBER" property="meetingBoardMaxMember"/>
+		<result column="MEETINGBOARDCATEGORY" property="meetingBoardCategory"/>
+		<result column="MEETINGBOARDHOSTDEMAND" property="meetingBoardHostDemand"/>
+		
+		<association property="memberDTO" javaType="MemberDTO">
+			<id column="MEMBERNUM" property="memberNum"/>
+			<result column="ID" property="id"/>
+			<result column="NAME" property="name"/>
+			<result column="NICKNAME" property="nickname"/>
+			<result column="PHONE" property="phone"/>
+			<result column="CASH" property="cash"/>
+		</association>
+		
+		<association property="meetingBoardImageDTO" javaType="MeetingBoardImageDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+		</association>
+		
+	</resultMap>
+
+	<select id="getCount" parameterType="MeetingBoardPager" resultType="Long">
+		SELECT COUNT(meetingboardnum) FROM MEETINGBOARD MB
+		INNER JOIN MEMBER M
+		ON(MB.meetingboardwriter = M.membernum)
+		WHERE
+			<choose>
+				<when test="kind == 'category'">meetingboardcategory</when>
+				<when test="kind == 'nickname'">nickname</when>
+				<otherwise>meetingboardtitle</otherwise>
+			</choose>
+			LIKE '%' || #{search} || '%'
+	</select>
+
+	<select id="getMeetingBoardList" parameterType="MeetingBoardPager" resultMap="getMeetingBoardListResult">
+		SELECT * FROM
+		(
+		    SELECT ROWNUM R, N.* FROM
+		    (SELECT MB.*, M.nickname, MBI.filename
+		    FROM MEETINGBOARD MB
+		    INNER JOIN MEMBER M
+		    ON(MB.meetingboardwriter = M.membernum)
+		    LEFT JOIN MEETINGBOARDIMAGE MBI
+		    ON(MB.meetingboardnum = MBI.meetingboardnum)
+		    WHERE
+		    	<choose>
+		    		<when test="kind == 'category'">meetingboardcategory</when>
+		    		<when test="kind == 'nickname'">nickname</when>
+		    		<otherwise>meetingboardtitle</otherwise>
+		    	</choose>
+		    	LIKE '%' || #{search} || '%'
+		    ORDER BY MB.meetingboardnum DESC) N)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<resultMap type="MeetingBoardDTO" id="getMeetingBoardListResult">
+		<id column="MEETINGBOARDNUM" property="meetingBoardNum"/>
+		<result column="MEETINGBOARDWRITER" property="meetingBoardWriter"/>
+		<result column="MEETINGBOARDTITLE" property="meetingBoardTitle"/>
+		<result column="MEETINGBOARDDUEDATE" property="meetingBoardDueDate"/>
+		<result column="MEETINGBOARDTOTALCOST" property="meetingBoardTotalCost"/>
+		<result column="MEETINGBOARDLOCATION" property="meetingBoardLocation"/>
+		<result column="MEETINGBOARDCURRENTMEMBER" property="meetingBoardCurrentMember"/>
+		<result column="MEETINGBOARDMAXMEMBER" property="meetingBoardMaxMember"/>
+		<result column="MEETINGBOARDCATEGORY" property="meetingBoardCategory"/>
+		
+		<association property="memberDTO" javaType="MemberDTO">
+			<result column="NICKNAME" property="nickname"/>
+		</association>
+		
+		<association property="meetingBoardImageDTO" javaType="MeetingBoardImageDTO">
+			<result column="FILENAME" property="fileName"/>
+		</association>
+		
+	</resultMap>
+	
+	<insert id="setMeetingBoardAdd" parameterType="MeetingBoardDTO">
+		<selectKey order="BEFORE" keyProperty="meetingBoardNum" resultType="Long">
+			SELECT MEETINGBOARD_SEQ.NEXTVAL FROM dual
+		</selectKey>
+		INSERT INTO meetingboard(meetingboardnum, meetingboardwriter, meetingboardtitle, meetingboardcontents, meetingboardduedate, meetingboardtotalcost, 
+		meetingboardlocation, meetingboardmaxmember, meetingboardcategory, meetingboardhostdemand)
+		VALUES (#{meetingBoardNum}, #{meetingBoardWriter}, #{meetingBoardTitle}, #{meetingBoardContents}, #{meetingBoardDueDate}, #{meetingBoardTotalCost}, 
+		#{meetingBoardLocation}, #{meetingBoardMaxMember}, #{meetingBoardCategory}, #{meetingBoardHostDemand})
+	</insert>
+	
+	<insert id="setMeetingBoardThumnailAdd" parameterType="MeetingBoardImageDTO">
+		INSERT INTO meetingboardimage(meetingboardnum, filename, oriname) VALUES (#{meetingBoardNum}, #{fileName}, #{oriName})
+	</insert>
+	
+	<select id="getMeetingBoardThumnailDetail" parameterType="MeetingBoardImageDTO" resultType="MeetingBoardImageDTO">
+		SELECT * FROM meetingboardimage WHERE filenum = #{fileNum}
+	</select>
+	
+	<delete id="setMeetingBoardThumnailDelete" parameterType="MeetingBoardImageDTO">
+		DELETE FROM meetingboardimage WHERE filenum = #{fileNum}
+	</delete>
+
+</mapper>

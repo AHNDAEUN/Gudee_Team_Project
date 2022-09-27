@@ -1,0 +1,122 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'MICEGothic Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'MICEMyungjo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEMyungjo.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'HS-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HS-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#mapFrame {
+	height: 100vh;
+}
+
+#map {
+	height: 100%;
+	position:relative;
+	overflow:hidden;
+}
+
+.hAddr {
+	position:absolute;
+	left:26%;
+	top:1%;
+	border-radius: 2px;
+	background:#fff;
+	background:rgba(255,255,255,0.8);
+	z-index:1;
+	padding:5px;
+}
+#addrTitle {
+	font-family: 'MICEGothic Bold';
+}
+#centerAddr {
+	display:block;
+	margin-top:2px;
+	font-weight: normal;
+}
+
+#searchFrame {
+	height: 100%;
+	overflow: auto;
+	padding-right: 0;
+}
+
+#searchIcon {
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+}
+
+.searchBox {
+	margin: 10px 0 0 0;
+	padding: 10px 0 10px 10px;
+	border: 2px solid lime;
+	border-radius: 10px;
+}
+
+#inputKeyword {
+	width: 290px;
+	padding: 0;
+	font-size: 23px;
+	border: 0;
+	outline: none;
+}
+
+#placesList {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.placesListItem {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	cursor: pointer;
+}
+
+.placesListItemDivTitle {
+	font-family: 'MICEGothic Bold';
+	margin-right: 10px;
+}
+
+.placesListItemDivUp {
+	width: 100%;
+}
+
+.placesListItemCategory {
+	float: right;
+}
+
+
+
+#addFormModalLabel {
+	margin: auto;
+	font-family: 'HS-Regular';
+	font-size: 2rem;
+	color: #00EA71;
+}
+#addFormModalCloseBtn {
+	margin: 0;
+}
+.addFormModalSubLabel {
+	font-family: 'HS-Regular';
+}
+#addFormModalOpenBtn {
+	display: none;
+}
+.categoryListItem {
+	cursor: pointer;
+}
+
+

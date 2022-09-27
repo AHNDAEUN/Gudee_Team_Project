@@ -1,0 +1,25 @@
+.logo{
+    text-align: center;
+    padding-top: 15px;
+    height: 100px;
+}
+
+.agree-title{
+    margin-left: 5px;
+    background-color: #FBF7F2;
+}
+
+.title-box{
+    height: 50px;
+    border-radius: 15px;
+    background-color: #FBF7F2;
+}
+
+.content-box{
+    border-radius: 15px;
+    margin-bottom: 15px;
+    height: 150px;
+    background-color: #E6F3E6;
+    padding: 15px 15px;
+    overflow: scroll auto;
+}

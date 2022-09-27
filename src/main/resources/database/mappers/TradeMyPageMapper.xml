@@ -3,30 +3,28 @@
 		    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		    
-<mapper namespace="com.goodee.market.trade.myPage.myPageDAO">
+<mapper namespace="com.goodee.market.trade.myPage.MyPageDAO">
 
-	<!-- MEMBER NUM으로 ID OR NICKNAME 불러와야함 -->
-	
-	
 	<!-- 판매리스트 -->
-	<select id="getSellItemList" resultType="SellItemListDTO">	
-		SELECT ITEMTITLE, ITEMPRICE FROM ITEM
+	<select id="getSellItemList" resultType="ItemDTO" parameterType="ItemDTO">	
+		SELECT ITEMNUM, ITEMCATEGORY, ITEMTITLE, ITEMPRICE, ITEMSTATUS FROM ITEM
 		    WHERE ITEMNUM
 		        =(SELECT ITEMNUM FROM SELLITEMLIST WHERE MEMBERNUM = 3)
 	</select>
 	
 	
 	<!-- 구매리스트 -->
-	<select id="getBuyItemList" resultType="BuyItemListDTO">
-		SELECT ITEMTITLE, ITEMPRICE, MEMBERNUM FROM ITEM
+	<select id="getBuyItemList" resultType="ItemDTO" parameterType="BuyerDTO">
+		SELECT ITEMCATEGORY, ITEMTITLE, ITEMPRICE, MEMBERNUM, ITEMSTATUS FROM ITEM
 		    WHERE ITEMNUM
-		        =(SELECT ITEMNUM FROM BUYITEMLIST WHERE REALBUYER = 5);
+		        =(SELECT ITEMNUM FROM BUYITEMLIST WHERE REALBUYER = 5)
 	</select>
 	
 	
 	<!-- 후기리스트 -->
-	<select id="getReviewList" resultType="ReviewDTO">
-		SELECT REVIEWTITLE, MEMBERNUM FROM REVIEW WHERE REALBUYER = 5;
+	<select id="getReviewList" resultType="ReviewDTO" parameterType="ReviewDTO">
+		SELECT REVIEWNUM, REVIEWTITLE, MEMBERNUM, ITEMNUM FROM REVIEW
+			WHERE REALBUYER = 5
 	</select>
 	
 </mapper>	

@@ -5,8 +5,69 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.goodee.market.member.MemberDAO">
 
+	<!-- 로그인 -->
 	<select id="getLogin" parameterType="MemberDTO" resultType="MemberDTO">
-		SELECT ID, NAME, NICKNAME, MEMBERNUM FROM MEMBER WHERE ID = #{id} AND PASSWORD = #{password}
+		SELECT ID, NAME, NICKNAME, MEMBERNUM, EMAIL, PHONE, ADDRESS, POSTCODE FROM MEMBER WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="setJoin" parameterType="MemberDTO">
+	<!-- Sequence를 미리 해나 빼서 memberNum에 저장 -->
+	<selectKey keyProperty="memberNum" order="BEFORE" resultType="Long">
+            SELECT MEMBER_SEQ.NEXTVAL FROM DUAL
+      </selectKey>
+		INSERT INTO MEMBER(MEMBERNUM, ID, PASSWORD, NAME, NICKNAME, EMAIL, PHONE, JOINDATE, CASH, BIRTHDAY, ADDRESS, POSTCODE)
+		VALUES(#{memberNum}, #{id}, #{password}, #{name}, #{nickname}, #{email}, #{phone}, SYSDATE, 0, #{birthday}, #{address}, #{postcode})
+	</insert>
+	
+	<!-- 파일추가 -->
+	<insert id="setAddFile" parameterType="MemberFileDTO">
+		INSERT INTO MEMBERIMAGE(FILENUM, FILENAME, ORINAME, MEMBERNUM)
+		VALUES (MEMBERIMAGE_SEQ.NEXTVAL, #{fileName}, #{oriName}, #{memberNum})
+	</insert>
+	
+	<!-- 회원정보 수정 시 불러오는 회원정보 -->
+	<select id="getMemberDetail" parameterType="MemberDTO" resultMap="getMyPageResult">
+		SELECT * FROM 
+		MEMBER M
+		INNER JOIN
+		MEMBERIMAGE MI
+		ON M.MEMBERNUM = MI.MEMBERNUM
+		WHERE M.MEMBERNUM = #{memberNum}
+	</select>
+	
+	<resultMap type="MemberDTO" id="getMyPageResult">
+		<id column="MEMBERNUM" property="memberNum"/>
+		<result column="ID" property="id"/>
+		<result column="PASSWORD" property="password"/>
+		<result column="NAME" property="name"/>
+		<result column="NICKNAME" property="nickname"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PHONE" property="phone"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="POSTCODE" property="postcode"/>
+		<result column="BIRTHDAY" property="birthday"/>
+		<association property="memberFileDTO" javaType="MemberFileDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+		</association>
+	</resultMap>
+	
+	
+	<!-- 프로필사진 정보 불러오기 -->
+	<select id="getFileDetail" parameterType="MemberFileDTO">
+	 	SELECT * FROM MEMBERIMAGE WHERE FILENUM = #{fileNum}
+	</select>
+	
+	<!-- 프로필사진 삭제 -->
+	<delete id="setFileDelete" parameterType="MemberFileDTO">
+	 	DELETE MEMBERIMAGE WHERE FILENUM = #{fileNum}
+	</delete>
+	
+	<update id="setInfoUpdate" parameterType="MemberDTO">
+		UPDATE MEMBER SET PASSWORD = #{password}, NAME = #{name}, NICKNAME = #{nickname}, 
+	</update>
+	
+	
 
 </mapper>

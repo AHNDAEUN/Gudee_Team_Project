@@ -1,0 +1,36 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'MICEGothic Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'MICEMyungjo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEMyungjo.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#navFooter a {
+	font-family: 'MICEGothic Bold';
+	color: #3BDF60;
+}
+
+#divFooter p {
+	font-family: 'MICEMyungjo';
+}
+
+.footerBoldText {
+	font-family: 'MICEGothic Bold';
+}
+
+#subLogo {
+	width: 200px;
+	height: 100px;
+	margin: 50px 0 20px 20px;
+}
+#subLogoText {
+	font-size: 38pt;
+	font-weight: bolder;
+}
