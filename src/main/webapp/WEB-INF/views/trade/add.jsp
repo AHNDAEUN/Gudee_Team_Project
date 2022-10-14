@@ -55,14 +55,7 @@
 			  <label for="category" class="form-label">카테고리</label>
 			  			  <input type="text" name="itemCategory" class="form-control" id="price" placeholder="가격 입력">
 			  
-			<!-- 	<select name="itemCategory">
-				 <option name="itemCategory" value="num1">하</option>
-				 <option name="itemCategory" value="num2">하하</option>
-				 <option name="itemCategory" value="num3">하하하</option>
-				 <option name="itemCategory" value="num4">하하하하</option>
-				 <option name="itemCategory" value="num5">하하하하하하</option>
-				</select>
-			</div>  -->	
+		
 			
 			<div class="mb-3">
 			  <label for="contents" class="form-label">상품 정보</label>

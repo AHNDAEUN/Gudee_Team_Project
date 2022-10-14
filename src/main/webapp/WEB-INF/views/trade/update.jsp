@@ -44,7 +44,7 @@
 		<form action="./update" method="POST" enctype="multipart/form-data">
 		
 		
-	
+			<input type="hidden" name="itemNum" value="${itemDTO.itemNum}">
 
 			<div class="mb-3">
 			  <label for="title" class="form-label">상품 이름</label>

@@ -29,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.goodee.market.member.RoleDTO" alias="RoleDTO"/>
 		<typeAlias type="com.goodee.market.member.InquiryDTO" alias="InquiryDTO"/>
 		<typeAlias type="com.goodee.market.util.Pager" alias="Pager"/>
+				<typeAlias type="com.goodee.market.util.Pager" alias="MainPager"/>
 		
 		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="java.lang.Integer" alias="Integer"/>
