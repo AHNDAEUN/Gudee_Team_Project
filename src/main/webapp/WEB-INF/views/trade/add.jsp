@@ -44,6 +44,8 @@
 					<h4 class="add-title">판매글 등록하기➕</h4>
 
 					<div class="add-air"></div>
+					<input type="hidden" name="itemNum" value="${itemDTO.itemNum}">
+
 
 					<div class="mb-3">
 						<label for="title" class="form-label">사용자 번호를 입력하세요.</label>
