@@ -33,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.goodee.market.meetingboard.member.MeetingBoardMemberDTO" alias="MeetingBoardMemberDTO"/>
 		<typeAlias type="com.goodee.market.meetingboard.util.MeetingBoardMemberPager" alias="MeetingBoardMemberPager"/>
 		
+		<typeAlias type="com.goodee.market.util.MainPager" alias="MainPager"/>
 		
 		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="java.lang.Integer" alias="Integer"/>
