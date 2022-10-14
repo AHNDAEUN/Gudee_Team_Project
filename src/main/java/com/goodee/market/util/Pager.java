@@ -170,6 +170,9 @@ public class Pager {
 		
 
 		public String getSelect() {
+			if(this.select==null) {
+				this.select="";
+			}
 			return select;
 		}
 

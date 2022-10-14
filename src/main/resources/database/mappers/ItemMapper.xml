@@ -5,21 +5,14 @@
     <mapper namespace="com.goodee.market.trade.item.ItemDAO">
     
     
-
-    <insert id="setItemReview" parameterType="ReviewDTO">
-    INSERT INTO REVIEW (REVIEWNUM, ITEMNUM, MEMBERNUM,  REVIEWTITLE, REVIEWCONTENT, REVIEWHIT, REVIEWSTAR)
-	VALUES(REVIEW_SEQ.NEXTVAL, #{itemNum}, #{memberNum}, #{reviewTitle},#{reviewContent},0, #{reviewStar});
-    </insert>
-
-<!--     <sql id="search">
+     <sql id="select">
 		WHERE
 			<choose>
 				<when test="select == 'title'">ITEMTITLE</when>
-				<otherwise>ITEMCONTENT</otherwise>
+				<otherwise>ITEMCONTENTS</otherwise>
 			</choose>
-		LIKE '%'||#{search}||'%'
-	</sql> -->
-
+		LIKE '%'||#{select}||'%'
+	</sql>
     
     
     
@@ -54,7 +47,7 @@
 		    (
 		        SELECT ROWNUM R, I.* FROM
 		            (SELECT * FROM ITEM 
-		            	<!-- <include refid="search"></include> -->
+		            	<include refid="select"></include>
 		             ORDER BY ITEMNUM DESC) I
 		    )
 			WHERE R BETWEEN #{startRow} and #{lastRow}		 	

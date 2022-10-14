@@ -21,6 +21,7 @@
 
 <body>
 		<!-- The Modal -->
+	<form action=./category>	
 	<div class="modal" id="myModal">
 		<div class="modal-dialog modal-xl">
 			<div class="modal-content">
@@ -35,11 +36,12 @@
 				      <option class="select" id="contents" value="contents">내용</option> 
 				    </select>
 					<input type="text" name="search" class="form-control" id="search">
-					<button class="btn btn-outline-secondary" type="submit" id="button-addon2" data-bs-dismiss="modal">검색</button>
+					<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	</form>
 		
 <header class="header">
 	<div class="header-up">
@@ -104,13 +106,13 @@
 				  <ul class="dropdown-menu">
 						<li><a href="/trade/category" class="cate-a-all">전체 카테고리</a></li>
 						<li><hr class="dropdown-divider"></li>
-						<li><a href="/trade/category/cloth" class="cate-a">의류</a></li>
-						<li><a href="/trade/category/food" class="cate-a">식품류</a></li>
-						<li><a href="/trade/category/book" class="cate-a">도서/문구</a></li>
-						<li><a href="/trade/category/beauty" class="cate-a">뷰티/미용</a></li>
-						<li><a href="/trade/category/digital" class="cate-a">생활/디지털</a></li>
-						<li><a href="/trade/category/pet" class="cate-a">반려동물 용품</a></li>
-						<li><a href="/trade/category/interior" class="cate-a">가구/인테리어</a></li>
+						<li><a href="/trade/category" class="cate-a">의류</a></li>
+						<li><a href="/trade/category" class="cate-a">식품류</a></li>
+						<li><a href="/trade/category" class="cate-a">도서/문구</a></li>
+						<li><a href="/trade/category" class="cate-a">뷰티/미용</a></li>
+						<li><a href="/trade/category" class="cate-a">생활/디지털</a></li>
+						<li><a href="/trade/category" class="cate-a">반려동물 용품</a></li>
+						<li><a href="/trade/category" class="cate-a">가구/인테리어</a></li>
 					</ul>
 				</li>
 				<li class="cate-li">

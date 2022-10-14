@@ -44,13 +44,13 @@
                         <div class="sidebar-cate">
                             <h4 class="sidebar-cate-title">전체 카테고리</h4>
                             <ul class="scate-ul">
-                            	<li class="scate-li"><a href="/trade/category" class="scate-a">의류</a></li>
-	                            <li class="scate-li"><a href="#" class="scate-a">식품류</a></li>
-	                            <li class="scate-li"><a href="#" class="scate-a">도서/문구</a></li>
-	                            <li class="scate-li"><a href="#" class="scate-a">뷰티/미용</a></li>
-	                            <li class="scate-li"><a href="#" class="scate-a">생활/디지털</a></li>
-	                            <li class="scate-li"><a href="#" class="scate-a">반려동물 용품</a></li>
-	                            <li class="scate-li"><a href="#" class="scate-a">가구/인테리어</a></li>							
+                            	<li class="scate-li"><a href="/trade/review" class="scate-a">의류</a></li>
+	                            <li class="scate-li"><a href="/trade/review" class="scate-a">식품류</a></li>
+	                            <li class="scate-li"><a href="/trade/review" class="scate-a">도서/문구</a></li>
+	                            <li class="scate-li"><a href="/trade/review" class="scate-a">뷰티/미용</a></li>
+	                            <li class="scate-li"><a href="/trade/review" class="scate-a">생활/디지털</a></li>
+	                            <li class="scate-li"><a href="/trade/review" class="scate-a">반려동물 용품</a></li>
+	                            <li class="scate-li"><a href="/trade/review" class="scate-a">가구/인테리어</a></li>							
                             </ul>
                         </div>
                     </div>                    
