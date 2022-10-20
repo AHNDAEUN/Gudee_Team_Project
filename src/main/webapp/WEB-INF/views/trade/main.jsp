@@ -91,33 +91,6 @@
         </div>
     </section>
     
-    <!-- 인기 상품 -->
-    <section class="main-item">
-        <div class="container">
-            <div class="row">
-                <div class="item-text">
-                    <a href="#" class="title-text">⏰ 최신 상품</a>
-                    <h6 class="sub-text">방금 등록된 상품이에요!</h6>
-                </div>
-            </div>
-            <div class="row featured-filter">
-            <c:forEach var="item" items="${list}">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="featured-item">
-                        <div class="featured-item-pic set-bg" data-setbg="/resources/images/trade/1_knit.jpg"
-                        	 style="background-image: url(&quot;/resources/images/trade/1_knit.jpg&quot;);">
-                        </div>
-                        <div class="featured-item-text">
-                            <h6><a href="../trade/detail?num=${item.itemNum}" class="item-name">${item.itemTitle}</a></h6>
-                            <h5>${item.itemPrice}</h5>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>    
-            </div>
-        </div>
-    </section>
-    
 	<c:import url="../template/trade/footer.jsp"></c:import>
 </body>
 

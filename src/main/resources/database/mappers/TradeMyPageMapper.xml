@@ -21,7 +21,7 @@
 	
 	
 	<!-- 구매리스트 -->
-	<select id="getBuyItemList" resultType="ItemDTO" parameterType="BuyerDTO">
+	<select id="getBuyItemList" resultType="ItemDTO" parameterType="ItemDTO">
 		SELECT * FROM ITEM
 		    WHERE ITEMNUM
 		        =(SELECT ITEMNUM FROM BUYITEMLIST WHERE MEMBERNUM=#{memberNum})

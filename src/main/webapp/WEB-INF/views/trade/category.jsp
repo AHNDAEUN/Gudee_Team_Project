@@ -80,7 +80,7 @@
                             <div class="product-item">
                                 <div class="featured-item-pic">
                                 	<c:forEach items="${item.itemImageDTOs}" var="fileDTO">
-                                		<img alt="" src="../resources/upload/item/${fileDTO.fileName}">
+                                		<img alt="" src="../resources/upload/trade/${fileDTO.fileName}">
                                 	</c:forEach>
                                 </div>
 
@@ -102,17 +102,17 @@
                                     <nav aria-label="Page navigation category">
                                         <ul class="pagination">
 	                                        <li class="page-item ${pager.pre ? '' : 'disabled' }">
-										  		<a class="page-link" href="./list?page=${pager.startNum - 1 }&filter=${pager.filter}&search=${pager.search}" aria-label="Previous">
+										  		<a class="page-link" href="./list?page=${pager.startNum - 1 }&select=${pager.select}&search=${pager.search}" aria-label="Previous">
 												   <span aria-hidden="true">&laquo;</span>
 												</a>
 										  	</li>
                                             <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="./category?page=${i}&filter=${pager.filter}&search=${pager.search}">${i}</a>
+                                                    <a class="page-link" href="./category?page=${i}&select=${pager.select}&search=${pager.search}">${i}</a>
                                                 </li>
                                             </c:forEach>
                                             <li class="page-item ${pager.next ? '' : 'disabled' }">
-											   <a class="page-link" href="./category?page=${pager.lastNum + 1 }&filter=${pager.filter}&search=${pager.search}" aria-label="Next">
+											   <a class="page-link" href="./category?page=${pager.lastNum + 1 }&select=${pager.select}&search=${pager.search}" aria-label="Next">
 											      <span aria-hidden="true">&raquo;</span>
 											   </a>
 											</li>

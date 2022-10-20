@@ -11,10 +11,8 @@
 				<when test="select == 'title'">ITEMTITLE</when>
 				<otherwise>ITEMCONTENTS</otherwise>
 			</choose>
-		LIKE '%'||#{select}||'%'
-	</sql>
-    
-    
+		LIKE '%' || #{search} || '%'
+	</sql>    
     
 	<select id="getFileDetail" resultType="ItemImageDTO" parameterType="ItemImageDTO">
 		SELECT * FROM ITEMIMAGE WHERE FILENUM=#{fileNum}
@@ -35,7 +33,7 @@
 		    (
 		        SELECT ROWNUM R, I.* FROM
 		            (SELECT * FROM ITEM 
-		            
+		            	<include refid="select"></include>
 		             ORDER BY ITEMNUM DESC) I
 		    )
 			WHERE R BETWEEN #{startRow} and #{lastRow}
@@ -67,7 +65,7 @@
             	MEMBER M
             ON M.MEMBERNUM= IM.MEMBERNUM
             
-            WHERE M.MEMBERNUM=3	 	
+            WHERE M.MEMBERNUM=#{memberNum} 	
 		</select>
 
 
@@ -82,7 +80,7 @@
     		
     	
     	<select id="getMainCount" resultType="Long" parameterType="MainPager">
-    			SELECT COUNT(ITEMNUM) FROM ITEM
+    			SELECT COUNT(ITEMNUM) FROM ITEM ORDER BY ITEMNUM DESC
 		</select>	
     		
 

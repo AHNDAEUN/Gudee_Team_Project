@@ -74,6 +74,7 @@ public class ItemDTO{
 	public void setItemStatus(Integer itemStatus) {
 		this.itemStatus = itemStatus;
 	}
+
 	
 	
 	

@@ -14,9 +14,11 @@ public class Pager {
 		private boolean pre;
 		private boolean next;
 		
+	
 		//검색어
 		private String search;
 		
+		//제목|카테고리
 		private String select;
 
 		//정렬
@@ -153,6 +155,9 @@ public class Pager {
 		}
 
 		public String getSearch() {
+			if(this.search==null) {
+				this.search="";
+			}
 			return search;
 		}
 
@@ -179,6 +184,9 @@ public class Pager {
 		public void setSelect(String select) {
 			this.select = select;
 		}
+
+
+		
 	
 }
 
