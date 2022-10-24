@@ -5,6 +5,7 @@
     <mapper namespace="com.goodee.market.trade.item.ItemDAO">
     
     
+    
      <sql id="select">
 		WHERE
 			<choose>
