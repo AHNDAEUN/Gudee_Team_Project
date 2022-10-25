@@ -63,6 +63,8 @@
 				</div>  
 
 			
+
+			
 					<div class="mb-3">
 						<label for="title" class="form-label">제목을 입력하세요.</label>
 						<input type="text" value="${itemDTO.itemTitle}" name="itemTitle" class="form-control" id="title" placeholder="">

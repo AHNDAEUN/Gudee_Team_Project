@@ -10,7 +10,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.goodee.market.util.FileDTO" alias="FileDTO"/>
 		<typeAlias type="com.goodee.market.trade.item.ItemDTO" alias="ItemDTO"/>
 		<typeAlias type="com.goodee.market.trade.item.ItemDAO" alias="ItemDAO"/>
-		<typeAlias type="com.goodee.market.trade.item.comment.ItemCommentDTO" alias="ItemCommentDTO"/>
 		<typeAlias type="com.goodee.market.trade.item.ItemImageDTO" alias="ItemImageDTO"/>
 		<typeAlias type="com.goodee.market.trade.item.like.ItemLike_MemberDTO" alias="ItemLike_MemberDTO"/>
 		<typeAlias type="com.goodee.market.trade.buyer.BuyerDTO" alias="BuyerDTO"/>
@@ -34,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.goodee.market.meetingboard.util.MeetingBoardMemberPager" alias="MeetingBoardMemberPager"/>
 		
 		<typeAlias type="com.goodee.market.util.MainPager" alias="MainPager"/>
+				<typeAlias type="com.goodee.market.util.Pager" alias="Pager"/>
 		
 		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="java.lang.Integer" alias="Integer"/>

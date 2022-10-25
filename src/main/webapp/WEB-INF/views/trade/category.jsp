@@ -79,7 +79,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product-item">
                                 <div class="featured-item-pic">
-                                	<c:forEach items="${item.itemImageDTOs}" var="fileDTO">
+                                	<c:forEach items="${dto.itemImageDTOs}" var="fileDTO" >
                                 		<img alt="" src="../resources/upload/item/${fileDTO.fileName}">
                                 	</c:forEach>
                                 </div>

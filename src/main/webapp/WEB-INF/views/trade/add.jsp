@@ -45,15 +45,14 @@
 
 					<div class="add-air"></div>
 					<input type="hidden" name="itemNum" value="${itemDTO.itemNum}">
-					<input type="hidden" id="memberNum" value="${itemDTO.memberNum }" name="memberNum">
+					<input type="hidden" id="memberNum" value="${member.memberNum}" name="memberNum">
 					
-
 
 				
 					<div class="mb-3">
 					<label for="category" class="form-label">카테고리</label>
 					
-					 <select name="itemCategory">
+					 	<select name="itemCategory">
 						<option name="itemCategory" value="의류" >의류</option>
 						<option name="itemCategory" value="식품류">식품류</option>
 						<option name="itemCategory" value="도서/문구">도서/문구</option>
@@ -64,6 +63,7 @@
 						</select>
 					</div>  
 
+						
 					<div class="mb-3">
 						<label for="title" class="form-label">제목을 입력하세요.</label>
 						<input type="text" name="itemTitle" class="form-control" id="title" placeholder="">

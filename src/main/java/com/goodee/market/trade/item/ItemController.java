@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.goodee.market.member.MemberDTO;
 import com.goodee.market.trade.review.ReviewDTO;
 import com.goodee.market.util.MainPager;
 import com.goodee.market.util.Pager;
@@ -25,6 +27,14 @@ public class ItemController{
 	private ItemService itemService;
 	
 	
+//	@PostMapping("review")
+//	@ResponseBody
+//	public int setItemReview()throws Exception {
+//		
+//		
+//		return "redirect:./trade/mypage";
+//	}
+//	
 	
 	@PostMapping("fileDelete")
 	@ResponseBody
@@ -101,6 +111,9 @@ public class ItemController{
 	public ModelAndView setAdd(ItemDTO itemDTO,MultipartFile[] files,HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView(); 
 		int item= itemService.setAdd(itemDTO,files,session.getServletContext());
+		MemberDTO memberDTO= (MemberDTO)session.getAttribute("member");
+		mv.addObject("itemDTO",itemDTO);
+		mv.addObject("member", memberDTO);
 		mv.setViewName("redirect:./category");
 		System.out.println("add success");
 		return mv;
@@ -114,6 +127,7 @@ public class ItemController{
 		itemDTO.setItemNum(num);
 		itemDTO = itemService.getDetail(itemDTO);
 		mv.addObject("itemDTO", itemDTO);
+		
 		mv.setViewName("trade/update");
 		return mv;
 	

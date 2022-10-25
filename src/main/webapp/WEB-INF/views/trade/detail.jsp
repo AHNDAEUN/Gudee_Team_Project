@@ -77,43 +77,34 @@
     <div class="sub_item_wrap">
 	
 
-            <div class="item_thum" id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div class="item_thum carousel slide" id="carouselExample" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                 
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <!-- 이미지 아래 ㅡ 자 모양 -->
                 </div>
                 <div class="carousel-inner">
-                    
-                    <div class="carousel-item active" data-bs-interval="10000">
-                     <c:forEach items="${dto.itemImageDTOs}" var="list" end="0">
-                        <img src="../../../resources/upload/item/${list.fileName}" width="100" height="100" class="d-block w-100" alt="...">
-                      </c:forEach>
-                      </div>
-          
-                    <div class="carousel-item" data-bs-interval="10000" >
-                        <c:forEach items="${dto.itemImageDTOs}" var="list" begin="1">
-                        <img src="../../../resources/upload/item/${list.fileName}" width="100" height="100" class="d-block w-100" alt="...">
-                      </c:forEach>
-                      </div>
-
-                      <div class="carousel-item" data-bs-interval="10000">
-                        <c:forEach items="${dto.itemImageDTOs}" var="list">
+                    <div class="carousel-item active" data-bs-interval="5000">
+                      <c:forEach items="${dto.itemImageDTOs}" var="list" end="0">
                         <img src="../../../resources/upload/item/${list.fileName}" class="d-block w-100" alt="...">
                       </c:forEach>
-                      </div>
                     </div>
-            
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
+                    <c:forEach items="${dto.itemImageDTOs}" var="list" begin="1">
+                      <div class="carousel-item" data-bs-interval="5000">
+                        <img src="../../../resources/upload/item/${list.fileName}" class="d-block w-100" alt="...">
+                      </div>
+                    </c:forEach>
+                </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
 
 
 
@@ -132,7 +123,6 @@
         <div class="item_info">
 			<div class="sns insta"></div>
 			<div class="itname fotr"> <span style="color:#55caca">[${dto.itemCategory}] </span>${dto.itemTitle}</div>
-			<span class="itdes">#화끈쭈꾸미 #고소한명란마요 #20년젓갈맛집</span>
 
 
 
@@ -145,23 +135,6 @@
                       </p>		
               </div>
 
-
-			<!-- <div class="btn_wrap">
-				<ul>
-					<li>
-						<a class="review_req" id="btn_order">
-                            <span class="text"><img src="/resources/images/btn_img1.png">채팅 신청하기</span>
-							
-						</a>
-					</li>
-			
-					<li>
-					<a class="scrap_btn" id="btn_zzim">
-						<span class="text"><img src="/resources/images/btn_img2.png">좋아요</span>
-					</a>
-					</li>
-				</ul>
-			</div> -->
 
 
 			<div class="review_wrap">
@@ -205,7 +178,6 @@
 
                         <div class="time_wrap">
                             <div class="left">
-                              <div class="" value="${sessionScope.member.memberNum}">   
 
                             <span class="title"><a href= "./update?num=${dto.itemNum}" class="btn btn-primary">상품 수정</a></span>
                             </div>
@@ -224,12 +196,9 @@
 
 
 
-
-
-
-
-         item_detail
+<!-- 
             <div class="item_detail">
+                <div class="item_wrap">
             
                 <ul class="teb_menu">
                     <li class="active"><a href="#tab1">댓글</a></li>
@@ -241,7 +210,7 @@
                 
                     <!-- comment -->
 
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="writer" class="form-label">사용자이름</label>
                         <input type="text" name="memberNum"  class="form-control" id="writer" >
                       </div>
@@ -260,7 +229,7 @@
             </div> 
 
 
-    <div id="tab2" class="tab-cont">
+    <!-- <div id="tab2" class="tab-cont">
    
 
             <div class="cpa">
@@ -278,7 +247,7 @@
     </div>
 	
     <br><br><br>
-</div>
+</div>  -->
 
 <script src="../../../resources/js/itemdetail.js"></script>
 <c:import url="../template/trade/footer.jsp"></c:import>

@@ -1,7 +1,7 @@
 
-.sub_item_wrap{ padding:220px; margin-right: auto; margin-left: auto; width: 1570px; overflow:hidden; margin-top:53px; margin-bottom: a; background-color:#fff;  }
+.sub_item_wrap{ padding-top:200px; padding-bottom:200px; margin: 0 auto; width: 1109px; overflow: hidden; display: flex; background-color: #fff; justify-content: center; align-items: flex-end; }
 .item_thum{ float:left; position:relative;  min-height:437px; text-align:center;  width:509px;}
-.item_info{ float:left; position:relative; display:block; width:600px; min-height:554px; text-align:center;}
+.item_info{ float:left; position:relative; display:block; width:570px; min-height:554px; text-align:left; margin-left:30px;}
 .item_info .sns{display:block;height:16px;}
 
 .item_info_left{ float:left; }
@@ -13,7 +13,6 @@
 
 .item_info_right{ float:right; text-align:left; margin-right:156px; overflow:hidden; }
 
-.item_btn{ background: url('/resources/images/btn_img2.png'); cursor: pointer;}
 
 .item_btn_cart{  display:inline-block;  background-position:-209px -0px; width:209px;height:88px;}
 .item_btn_buy{  display:inline-block; background-position:-0px -0px; width:209px;height:88px;}
@@ -24,7 +23,7 @@
 
 
 
-.item_detail { display:block; width:100%; margin-top:35px; margin-left: auto; margin-right: auto; }
+.item_detail { display:block; width:100%; margin-top:px; margin-left: auto; margin-right: auto; }
 
 
 .item_detail_left { width:100%; margin-right: auto; margin-left: auto; } 
@@ -52,7 +51,6 @@
 .item_info .review_wrap .next{line-height:92px;float:left;}
 .item_info .review_wrap .box{display:block; width:30%; height:92px;position:relative; float:left;}
 .item_info .review_wrap .box .icon{display:block; width:41px; height:37px;position:absolute;top:30px; left:20px;}
-.item_info .review_wrap .box .pro1{background:url(/resources/upload/item/KakaoTalk_2011.jpg);}
 .item_info .review_wrap .box .text{display:block;padding-left:70px; padding-top:30px; font-size:15px;}
 .item_info .review_wrap .box .text em{display:block; color:#7fad39; margin-bottom:5px;}
 .item_info .review_wrap .box .text b{display:block; font-weight:normal; color:#686868;}
