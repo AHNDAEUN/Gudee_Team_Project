@@ -44,26 +44,26 @@
 					<h4 class="add-title">판매글 등록하기➕</h4>
 
 					<div class="add-air"></div>
-
-					<div class="mb-3">
-						<label for="title" class="form-label">사용자 번호를 입력하세요.</label>
-					<input type="text" name="memberNum" class="form-control" id="num" >
-					</div>
-
+					<input type="hidden" name="itemNum" value="${itemDTO.itemNum}">
+					<input type="hidden" id="memberNum" value="${member.memberNum}" name="memberNum">
 					
+
+				
 					<div class="mb-3">
 					<label for="category" class="form-label">카테고리</label>
-								<input type="text" name="itemCategory" class="form-control" id="category" placeholder="카테고리를 입력하세요.">
-					</div>
-					<!-- 	<select name="itemCategory">
-						<option name="itemCategory" value="num1">하</option>
-						<option name="itemCategory" value="num2">하하</option>
-						<option name="itemCategory" value="num3">하하하</option>
-						<option name="itemCategory" value="num4">하하하하</option>
-						<option name="itemCategory" value="num5">하하하하하하</option>
+					
+					 	<select name="itemCategory">
+						<option name="itemCategory" value="의류" >의류</option>
+						<option name="itemCategory" value="식품류">식품류</option>
+						<option name="itemCategory" value="도서/문구">도서/문구</option>
+						<option name="itemCategory" value="뷰티/미용">뷰티/미용</option>
+						<option name="itemCategory" value="생활/디지털">생활/디지털</option>
+						<option name="itemCategory" value="반려동물 용품">반려동물 용품</option>
+						<option name="itemCategory" value="가구/인테리어">가구/인테리어</option>
 						</select>
-					</div>  -->	
+					</div>  
 
+						
 					<div class="mb-3">
 						<label for="title" class="form-label">제목을 입력하세요.</label>
 						<input type="text" name="itemTitle" class="form-control" id="title" placeholder="">
