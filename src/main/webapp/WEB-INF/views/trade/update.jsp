@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품 수정</title>
+<title>판매글 수정➕│구디마켓│중고거래📦</title>
+
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <!--summernote jquery  -->
 <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -24,18 +25,19 @@
 <style>
 .update{
 
-
 	position: relative;
     /* overflow: hidden; */
     padding-top: 190px;
     line-height: 170%;
-    font-family: 'Noto Sans KR', sans-serif;
-}
+    font-family: 'Noto Sans KR', sans-serif;}
 </style>
 
+
+</head>
+<body>
+
+
 <div class="update">
-
-
 
 
 <section class="container-fluid col-lg-4">
@@ -44,13 +46,37 @@
 		<form action="./update" method="POST" enctype="multipart/form-data">
 		
 		
-	
+			<input type="hidden" name="itemNum" value="${itemDTO.itemNum}">
+			
+			<div class="mb-3">
+				<label for="category" class="form-label">카테고리</label>
+				
+				 <select name="itemCategory">
+					<option name="itemCategory" value="의류" >의류</option>
+					<option name="itemCategory" value="식품류">식품류</option>
+					<option name="itemCategory" value="도서/문구">도서/문구</option>
+					<option name="itemCategory" value="뷰티/미용">뷰티/미용</option>
+					<option name="itemCategory" value="생활/디지털">생활/디지털</option>
+					<option name="itemCategory" value="반려동물 용품">반려동물 용품</option>
+					<option name="itemCategory" value="가구/인테리어">가구/인테리어</option>
+					</select>
+				</div>  
+
+			
+
+			
+					<div class="mb-3">
+						<label for="title" class="form-label">제목을 입력하세요.</label>
+						<input type="text" value="${itemDTO.itemTitle}" name="itemTitle" class="form-control" id="title" placeholder="">
+					</div>
+			
 
 			<div class="mb-3">
-			  <label for="title" class="form-label">상품 이름</label>
-			  <input type="text" name="itemTitle" value="${itemDTO.itemTitle}" class="form-control" id="title" placeholder="제목 입력">
+			  <label for="price" class="form-label">가격을 입력하세요.</label>
+			  <input type="text" name="itemPrice" value="${itemDTO.itemPrice}" class="form-control" id="price" placeholder="가격 입력">
 			</div>
-			
+
+
 
 			<c:forEach items="${itemDTO.itemImageDTOs}" var="fileDTO">
 			<div class="mb-3">
@@ -64,37 +90,16 @@
 		
 				</div>
 		
-
-			<div class="mb-3">
-			  <label for="price" class="form-label">가격</label>
-			  <input type="text" name="itemPrice" value="${itemDTO.itemPrice}" class="form-control" id="price" placeholder="가격 입력">
-			</div>
 			
 			<div class="mb-3">
-			  <label for="category" class="form-label">카테고리</label>
-			  			  <input type="text" name="itemCategory" value="${itemDTO.itemCategory}" class="form-control" id="price" placeholder="가격 입력">
-			  
-			<!-- 	<select name="itemCategory">
-				 <option name="itemCategory" value="num1">하</option>
-				 <option name="itemCategory" value="num2">하하</option>
-				 <option name="itemCategory" value="num3">하하하</option>
-				 <option name="itemCategory" value="num4">하하하하</option>
-				 <option name="itemCategory" value="num5">하하하하하하</option>
-				</select>-->
-			<div class="mb-3">
 
-			  <label for="contents" class="form-label">상품 정보</label>
+			  <label for="contents" class="form-label">상품 설명을 작성해 주세요.</label>
 			  <textarea class="form-control" name="itemContents" value="${itemDTO.itemContents}" id="contents" rows="3"></textarea>
 			</div>
 
 			
-			<br><br><br>
 			<div class="mb-3">
-			
-
-			
-			<div class="mb-3">
-				<button type="submit" class="btn btn-success">등록</button>
+				<button type="submit" class="btn btn-success">판매글 수정</button>
 			</div>
 		</form>
 	</div>
