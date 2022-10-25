@@ -1,19 +1,31 @@
 package com.goodee.market.trade.item;
 
 import java.sql.Date;
+import java.util.List;
 
-public class ItemDTO {
+
+public class ItemDTO{
 	
 	   private Long itemNum;
 	   private Long memberNum;
 	   private String itemTitle;
-	   private String itemCotents;
+	   private String itemContents;
 	   private String itemCategory;
 	   private Integer itemPrice;
 	   private Date itemDueDate;
 	   private Integer itemStatus;
+	   private List<ItemImageDTO>itemImageDTOs;
 	   
 	   
+
+	 
+	public List<ItemImageDTO> getItemImageDTOs() {
+	 return itemImageDTOs;
+	}
+	public void setItemImageDTOs(List<ItemImageDTO> itemImageDTOs) {
+		this.itemImageDTOs = itemImageDTOs;
+	}
+  
 	public Long getItemNum() {
 		return itemNum;
 	}
@@ -32,11 +44,11 @@ public class ItemDTO {
 	public void setItemTitle(String itemTitle) {
 		this.itemTitle = itemTitle;
 	}
-	public String getItemCotents() {
-		return itemCotents;
+	public String getItemContents() {
+		return itemContents;
 	}
-	public void setItemCotents(String itemCotents) {
-		this.itemCotents = itemCotents;
+	public void setItemContents(String itemContents) {
+		this.itemContents = itemContents;
 	}
 	public String getItemCategory() {
 		return itemCategory;
@@ -62,6 +74,9 @@ public class ItemDTO {
 	public void setItemStatus(Integer itemStatus) {
 		this.itemStatus = itemStatus;
 	}
+	
+	
+	
 	   
 	   
 	   

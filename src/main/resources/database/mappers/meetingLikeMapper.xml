@@ -3,4 +3,18 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.goodee.market.meetingboard.like.MeetingLikeDAO"></mapper>
+<mapper namespace="com.goodee.market.meetingboard.like.MeetingLikeDAO">
+	
+	<insert id="setLike" parameterType="MeetingLikeDTO">
+		INSERT INTO MEETINGLIKE_MEMBER(MEMBERNUM, MEETINGBOARDNUM) VALUES(#{memberNum}, #{meetingBoardNum})
+	</insert>
+	
+	<select id="getLikeExist" parameterType="MeetingLikeDTO" resultType="Integer">
+		SELECT COUNT(MLMNUM) FROM MEETINGLIKE_MEMBER WHERE MEMBERNUM = #{memberNum} AND MEETINGBOARDNUM = #{meetingBoardNum}
+	</select>
+	
+	<delete id="setUnlike" parameterType="MeetingLikeDTO">
+		DELETE FROM MEETINGLIKE_MEMBER WHERE MEMBERNUM = #{memberNum} AND MEETINGBOARDNUM = #{meetingBoardNum}
+	</delete>
+	
+</mapper>

@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.goodee.market.meetingboard.MeetingBoardDTO;
+import com.goodee.market.meetingboard.like.MeetingLikeDTO;
 
 public class MemberDTO {
 	
@@ -19,9 +21,14 @@ public class MemberDTO {
 	private Long cash;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
-	private String address;
+	private String main_address;
+	private String detail_address;
 	private String postcode;
 	private MemberFileDTO memberFileDTO;
+	private List<MeetingLikeDTO> meetingLikeDTOs;
+	private List<MeetingBoardDTO> meetingBoardDTOs;
+	private List<RoleDTO> roleDTOs;
+	private List<ReportDTO> reportDTOs;
 	
 	public Long getMemberNum() {
 		return memberNum;
@@ -83,13 +90,19 @@ public class MemberDTO {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
 
+	public String getMain_address() {
+		return main_address;
+	}
+	public void setMain_address(String main_address) {
+		this.main_address = main_address;
+	}
+	public String getDetail_address() {
+		return detail_address;
+	}
+	public void setDetail_address(String detail_address) {
+		this.detail_address = detail_address;
+	}
 	public MemberFileDTO getMemberFileDTO() {
 		return memberFileDTO;
 	}
@@ -102,8 +115,29 @@ public class MemberDTO {
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
 	}
-	
-	
-	
+	public List<MeetingLikeDTO> getMeetingLikeDTOs() {
+		return meetingLikeDTOs;
+	}
+	public void setMeetingLikeDTOs(List<MeetingLikeDTO> meetingLikeDTOs) {
+		this.meetingLikeDTOs = meetingLikeDTOs;
+	}
+	public List<MeetingBoardDTO> getMeetingBoardDTOs() {
+		return meetingBoardDTOs;
+	}
+	public void setMeetingBoardDTOs(List<MeetingBoardDTO> meetingBoardDTOs) {
+		this.meetingBoardDTOs = meetingBoardDTOs;
+	}
+	public List<RoleDTO> getRoleDTOs() {
+		return roleDTOs;
+	}
+	public void setRoleDTOs(List<RoleDTO> roleDTOs) {
+		this.roleDTOs = roleDTOs;
+	}
+	public List<ReportDTO> getReportDTOs() {
+		return reportDTOs;
+	}
+	public void setReportDTOs(List<ReportDTO> reportDTOs) {
+		this.reportDTOs = reportDTOs;
+	}
 	
 }

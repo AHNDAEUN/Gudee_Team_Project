@@ -9,8 +9,8 @@ public class TradingItemDTO {
 	private Long memberNum;
 	private Long realBuyer;
 	private Date plannedDealDate;
-	private Long sellerRe;
-	private Long buyerRe;
+	private Long sellerRe; //판매자 응답 - 거래 완료 확인 용
+	private Long buyerRe; //구매자 응답
 	
 //-------------------------------------------	
 	public Long getPlannedDealNum() {

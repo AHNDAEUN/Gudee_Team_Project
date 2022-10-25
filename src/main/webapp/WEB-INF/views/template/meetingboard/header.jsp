@@ -22,11 +22,11 @@
 			      <div class="navbar-nav" id="navPersonal">
 			      	<c:if test="${sessionScope.member == null }">
 				        <a class="nav-link active" aria-current="page" href="/member/login">로그인</a>
-				        <a class="nav-link" href="#">회원가입</a>
+				        <a class="nav-link" href="/member/join">회원가입</a>
 			        </c:if>
 			        <c:if test="${sessionScope.member != null }">
-			        	<a class="nav-link active" aria-current="page" href="#">로그아웃</a>
-				        <a class="nav-link" href="#">마이페이지</a>
+			        	<a class="nav-link active" aria-current="page" href="/member/logout">로그아웃</a>
+				        <a class="nav-link" href="/member/myPage">마이페이지</a>
 			        </c:if>
 			        <a class="nav-link" href="#">중고거래</a>
 			        <a class="nav-link" href="#">고객센터</a>

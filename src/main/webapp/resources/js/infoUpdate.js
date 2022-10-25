@@ -13,7 +13,6 @@ let br = document.createElement('br');
 const email_txt = document.querySelector('#email-txt');
 const domainList = document.querySelector('#domain-list');
 const domainInput = document.querySelector('#domain-txt');
-const address = document.querySelector('#address');
 const addressm = document.querySelector('.addressm');
 const postcode = document.getElementById('postcode');
 const mainAddress = document.getElementById("mainAddress");
@@ -26,13 +25,7 @@ function init(){
     let emailValue = email.value.split('@');
     email_txt.value = emailValue[0];
     domainInput.value = emailValue[1];
-
-    //주소 쪼개서 각각 input 태그에 기존 value 넣기
-    
-
 }
-
-
 
 function joinCheck(){
     //아이디 조건 메세지
@@ -65,17 +58,6 @@ function joinCheck(){
         })
     });
 
-    // for(i = 0; i < cb.length; i++){
-    //     console.log("cb[i]: ",cb[i].value);
-    //     cb[i].addEventListener('blur',function(c){
-    //         if(c.value.length < 2){
-    //             ch[i].innerHTML = '두 글자 이상 입력해주세요';
-    //         }else{
-    //             ch[i].innerHTML = '';
-    //         }
-    //     })
-    // }
-
     //코드 잘못 쓰면 무한루프...
 
     //프로필 사진 추가 조건 메세지
@@ -89,9 +71,9 @@ function joinCheck(){
     })
 
     //주소 입력 조건 메세지
-    address.addEventListener('blur', function(){
-        console.log(address.value.length);
-        if(address.value == ''){
+    detailAddress.addEventListener('blur', function(){
+        console.log(detailAddress.value.length);
+        if(detailAddress.value == '' || postcode.value == ''){
             addressm.innerHTML = '주소를 입력해주세요';
         }else{
             addressm.innerHTML = '';
@@ -142,21 +124,21 @@ function joinCheck(){
 
         console.log(email.value);
 
-        //주소 합치기
-        address.value = mainAddress.value + ' ' + detailAddress.value;
         console.log(id.value.length >= 2);
         console.log(pw.value.length >= 4);
         console.log(check);
         console.log(photo.value != '');
-        console.log(birthday.value != '');
         console.log(email.value != '');
-        console.log(address.value != '');
+        console.log(mainAddress.value != '');
+        console.log(detailAddress.value != '');
+        console.log(postcode.value != '');
+
         for(let i = 0; i < cb.length; i++){
             console.log(cb[i].value);
         }
         
-        if(id.value.length >= 2 && pw.value.length >= 4 && check && photo.value != '' && address.value != '' && email.value != ''){
-            // form.submit();
+        if(id.value.length >= 2 && pw.value.length >= 4 && check && detailAddress.value != '' && postcode.value != '' && email.value != ''){
+            form.submit();
         }else{
             alert('입력조건을 확인해주세요');
         }
@@ -196,19 +178,61 @@ function checkPost() {
                 if(extraAddr !== ''){
                     extraAddr = ' (' + extraAddr + ')';
                 }
-                // 조합된 참고항목을 해당 필드에 넣는다.
-                detailAddress.value = extraAddr;
-            
-            } else {
-                detailAddress.value = '';
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             postcode.value = data.zonecode;
-            mainAddress.value = addr;
+            mainAddress.value = addr + extraAddr;
             // 커서를 상세주소 필드로 이동한다.
             detailAddress.focus();
         }
     }).open();
 }
+
+const fileDelete = document.querySelectorAll('.fileDelete');
+const notNullImage = document.querySelector('#notNullImage');
+
+try {
+    fileDelete.forEach(function(f){
+        f.addEventListener('click', function(){
+            console.log('fileDelete');
+             let check = window.confirm('삭제하시겠습니까?');
+             if(!check){
+                return;
+             }
+        
+             let fileNum = f.getAttribute('data-file-num');
+             console.log(fileNum);
+        
+             //ajax
+             //1. request 객체 생성
+             const xhttp = new XMLHttpRequest();
+        
+             //2. 메서드, URL 작성
+             xhttp.open('POST', 'fileDelete');
+        
+             //3. encType
+             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        
+             //4. 요청
+             xhttp.send("fileNum=" + fileNum);
+        
+             //5. 응답처리
+             xhttp.onreadystatechange=function(){
+                if(xhttp.readyState==4 && xhttp.status==200){
+                    let result = xhttp.responseText.trim();
+                    if(result == 1){
+                        console.log('삭제실행');
+                        notNullImage.setAttribute('src', '/resources/images/Default Image.png');
+                    }else{
+                        console.log('삭제실행 안됨');
+                    }
+                }
+             }
+        })
+    })
+} catch (error) {
+    
+}
+
 

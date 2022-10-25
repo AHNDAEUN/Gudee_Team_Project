@@ -18,6 +18,10 @@
     font-style: normal;
 }
 
+body {
+	background-image: url('/resources/images/meetingboard/circle-scatter-listitem.svg');
+}
+
 #detailMainSection {
 	margin: 4rem auto 0 auto;
 	padding-bottom: 1rem;
@@ -84,6 +88,7 @@
 #detailTitleUserFrame {
 	display: flex;
 	align-items: center;
+	padding-top: 0.5rem;
 }
 
 #detailTitleUserFrame > span {
@@ -117,6 +122,15 @@
 	margin-top: 1rem;
 }
 
+#unlikeBtn {
+	width:3rem;
+	height:3rem;
+	float: right;
+	cursor: pointer;
+	margin-right: 2.5rem;
+	margin-top: 1rem;
+}
+
 #joinBtn {
 	width:4rem;
 	height:4rem;
@@ -125,3 +139,101 @@
 	margin-left: 2.5rem;
 	margin-top: 1rem;
 }
+
+#unjoinBtn {
+	width:4rem;
+	height:4rem;
+	float: left;
+	cursor: pointer;
+	margin-left: 2.5rem;
+	margin-top: 1rem;
+}
+
+#commentInputFrame {
+	margin: 1rem auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.commentListItem {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #98F4D6;
+	margin-bottom: 0.5rem;
+	border-radius: 15px;
+	padding: 1rem;
+	width: 90%;
+}
+
+.commentItemInfoWriterFrame {
+	margin: 0.5rem;
+}
+
+.commentWriterImage {
+	width:3rem;
+	height:3rem;
+}
+
+.commentWriterNickname{
+	display: inline-block;
+	font-family: 'HS-Regular';
+	font-size: 1.5rem;
+}
+
+.commentItemContents {
+	margin: 0.5rem;
+	font-family: 'MICEMyungjo';
+	font-size: 1.3rem;
+}
+
+.commentItemDate {
+	font-family: 'MICEGothic Bold';
+	font-size: 1.3rem;
+}
+
+.dummychild {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.buttonSection {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+#requestApprovalModalOpenBtn {
+	display: none;
+}
+
+
+#detailJoinListSection {
+	padding: 1rem;
+	margin-top: 1rem;
+	background-color: #F4ECFF;
+	border-radius: 15px;
+	display: flex;
+	flex-direction: row;
+}
+
+
+.dJoinListFrame {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 0.5rem;
+}
+
+.dJoinListItemNickname {
+	font-family: 'HS-Regular';
+	font-size: 1.8rem;
+}
+
+
+

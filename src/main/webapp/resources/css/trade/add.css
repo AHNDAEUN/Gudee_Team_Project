@@ -1,0 +1,52 @@
+.addBody {
+    position: relative;
+    /* overflow: hidden; */
+    padding-top: 190px;
+    line-height: 170%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.add-top {
+    padding-bottom: 80px;
+}
+
+.add-container {
+    max-width: 960px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.add-row {
+    margin-right: -15px;
+    margin-left: 15rem;
+    box-sizing: border-box;
+}
+
+.add-title{
+    font-weight: bold;
+    color: #7fad39;
+    margin-bottom: 2rem;
+}
+
+.add-air {
+    border-top: 1px solid #ebebeb;
+    margin: 2rem;
+    margin-left: -2rem;
+    margin-right: 10rem;
+}
+
+.add-btn {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: #7fad39;
+    background-color: #7fad39;
+    color: #ffff;
+}
+
+.add-btn:hover{
+    background-color: #ebebeb;
+    color: black;
+}

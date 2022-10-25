@@ -22,12 +22,14 @@
 	</update>
 
 	<select id="getMeetingBoardDetail" parameterType="MeetingBoardDTO" resultMap="getDetailResult">
-		SELECT MB.*, M.*, MBI.filenum, MBI.filename
+		SELECT MB.*, M.*, MBI.filenum, MBI.filename, MI.filenum AS PROFILENUM, MI.filename AS PROFILENAME
 		FROM MEETINGBOARD MB
 		INNER JOIN MEMBER M
 		ON(MB.meetingboardwriter = M.membernum)
 		LEFT JOIN MEETINGBOARDIMAGE MBI
 		ON(MB.meetingboardnum = MBI.meetingboardnum)
+        LEFT JOIN MEMBERIMAGE MI
+        ON(M.membernum = MI.membernum)
 		WHERE MB.meetingboardnum = #{meetingBoardNum}
 	</select>
 	
@@ -51,6 +53,13 @@
 			<result column="NICKNAME" property="nickname"/>
 			<result column="PHONE" property="phone"/>
 			<result column="CASH" property="cash"/>
+			<result column="JOINDATE" property="joinDate"/>
+			
+			<association property="memberFileDTO" javaType="MemberFileDTO">
+				<id column="PROFILENUM" property="fileNum"/>
+				<result column="PROFILENAME" property="fileName"/>
+			</association>
+			
 		</association>
 		
 		<association property="meetingBoardImageDTO" javaType="MeetingBoardImageDTO">
@@ -71,6 +80,7 @@
 				<otherwise>meetingboardtitle</otherwise>
 			</choose>
 			LIKE '%' || #{search} || '%'
+			AND MB.MEETINGBOARDDUEDATE >= sysdate
 	</select>
 
 	<select id="getMeetingBoardList" parameterType="MeetingBoardPager" resultMap="getMeetingBoardListResult">
@@ -90,6 +100,7 @@
 		    		<otherwise>meetingboardtitle</otherwise>
 		    	</choose>
 		    	LIKE '%' || #{search} || '%'
+		    	AND MB.MEETINGBOARDDUEDATE >= sysdate
 		    ORDER BY MB.meetingboardnum DESC) N)
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
@@ -136,5 +147,13 @@
 	<delete id="setMeetingBoardThumnailDelete" parameterType="MeetingBoardImageDTO">
 		DELETE FROM meetingboardimage WHERE filenum = #{fileNum}
 	</delete>
+
+	<update id="setMeetingBoardCurrentMemberUpdate" parameterType="MeetingBoardDTO">
+		UPDATE MEETINGBOARD SET MEETINGBOARDCURRENTMEMBER = MEETINGBOARDCURRENTMEMBER + 1 WHERE MEETINGBOARDNUM = #{meetingBoardNum}
+	</update>
+	
+	<update id="setMeetingBoardCurrentMemberUpdateMinus" parameterType="MeetingBoardDTO">
+		UPDATE MEETINGBOARD SET MEETINGBOARDCURRENTMEMBER = MEETINGBOARDCURRENTMEMBER - 1 WHERE MEETINGBOARDNUM = #{meetingBoardNum}
+	</update>
 
 </mapper>

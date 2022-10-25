@@ -1,0 +1,249 @@
+.myPageMainBody {
+    position: relative;
+    /* overflow: hidden; */
+    padding-top: 190px;
+    line-height: 170%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.mp-top {
+    padding-bottom: 80px;
+}
+
+.mp-container {
+    max-width: 960px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.mp-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    box-sizing: border-box;
+}
+
+/*---------------------------------------------------------------*/
+/* 사이드 바 */
+.col-lg-3 {
+    flex: 0 0 auto;
+    width: 25%;
+}
+
+.sidebar-mp-mb {
+    margin-bottom: 35px;
+    padding: 1.5rem;
+    border-bottom: solid 1px #ebebeb;
+    background-color: #7fad39;
+}
+
+.sidebar-mp {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    padding: 1.5rem;
+    border-top: solid 1px #ebebeb;
+    border-bottom: solid 1px #ebebeb;
+    background-color: #7ead3924;
+}
+
+.sidebar-mb-title {
+    color: #ffff;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.sidebar-mb-con {
+    margin-bottom: 2rem;
+}
+
+.mb-pic {
+    width: 190px;
+    position: relative;
+    overflow: hidden;
+    background-position: center center;
+    padding-bottom: 1.5rem;
+}
+
+.mp-mb-nk {
+    color: #ffff;
+    margin-bottom: 1rem;
+}
+
+.mp-mb-h {
+    text-decoration: none;
+    font-weight: bold;
+    color: #7fad39;
+    background-color: #ffff;
+    border-color: #000000;
+
+    margin-top: 1rem;
+    margin-left: 4.8rem;
+    padding: 0.4rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    border-radius: 0.5rem;
+}
+
+.mp-mb-h:hover {
+    color: #000000;
+    background-color: #c3d2ab;
+}
+
+.sidebar-mp-title {
+    color: #7fad39;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.mp-ul {
+    margin-top: 0;
+    padding-left: 0px;
+}
+
+.mp-li {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+.mp-a {
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+}
+
+.mp-a:hover {
+    color: #7fad39;
+}
+
+/*---------------------------------------------------------------*/
+/* 바디 */
+
+/* 제목 */
+.mp-main {
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.mp-m-main {
+    display: flex;
+    padding-bottom: 0.1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mp-m-title {
+    text-align: left;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.mp-more-h {
+    text-align: right;
+}
+
+.mp-thead {
+    background-color: #7fad39;
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.mp-thead tr {
+    width: 100%;
+}
+
+.mp-thead th {
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+
+.mp-more-a {
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 14.5px;
+    color: #979797;
+}
+
+.mp-more-a:hover {
+    color: #7fad39;
+}
+
+
+/* 내용 */
+.mp-air {
+    margin-bottom: 4rem;
+}
+
+.mp-table {
+    max-width: 960px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.mp-table table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+.mp-title {
+    color: #ffff;
+    font-weight: bold;
+    padding: 0.3rem;
+}
+
+.mp-img {
+    display: inline-block;
+    margin-right: 2rem;
+    margin-left: -4rem;
+    max-width: 100%;
+    vertical-align: middle;
+    border-style: none;
+}
+
+.mp-imgtext {
+    text-decoration: none;
+    color: #1c1c1c;
+    display: inline-block;
+    margin-bottom: 0px;
+}
+
+.mp-imgtext:hover{
+    color: #7fad39;
+}
+
+.mp-m-tbody tr td h6 {
+    display: inline-block;
+}
+
+.mp-text {
+    width: 100%;
+}
+
+.mp-table table tbody tr td {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ebebeb;
+}    
+
+.mp-etc {
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 14.5px;
+    font-weight: bold;
+    color: #7fad39;
+}
+
+.mp-etc:hover {
+    color: #000000;
+}

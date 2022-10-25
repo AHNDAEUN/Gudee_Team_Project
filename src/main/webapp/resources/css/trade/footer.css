@@ -1,0 +1,26 @@
+.footer {
+    background: #F3F6FA;
+    padding-top: 35px;
+    padding-bottom: 20px;
+    font-weight: bold;
+}
+
+
+.footer-row {
+    margin-bottom: 10px;
+}
+
+.footer-logo-img {
+    width: 200px;
+    height: 200px;
+}
+
+.footer-ul {
+    padding: 10px 10px;
+    margin: 10px;
+}
+
+.footer-li {
+    list-style: none;
+    padding-bottom: 5px;
+}

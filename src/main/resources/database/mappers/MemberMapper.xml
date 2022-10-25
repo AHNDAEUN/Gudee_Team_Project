@@ -6,9 +6,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.goodee.market.member.MemberDAO">
 
 	<!-- 로그인 -->
-	<select id="getLogin" parameterType="MemberDTO" resultType="MemberDTO">
-		SELECT ID, NAME, NICKNAME, MEMBERNUM, EMAIL, PHONE, ADDRESS, POSTCODE FROM MEMBER WHERE ID = #{id} AND PASSWORD = #{password}
+
+	<select id="getLogin" parameterType="MemberDTO" resultMap="getLogin">
+		SELECT M.ID, M.NAME, M.NICKNAME, M.MEMBERNUM, M.EMAIL, M.PHONE, M.BIRTHDAY, M.CASH, 
+		M.MAIN_ADDRESS, M.DETAIL_ADDRESS, M.POSTCODE, M.JOINDATE, R.ROLENUM, R.ROLENAME FROM 
+		MEMBER M
+		INNER JOIN
+		MEMBER_ROLES MR 
+		ON M.MEMBERNUM = MR.MEMBERNUM 
+		INNER JOIN
+		ROLES R 
+		ON MR.ROLENUM = R.ROLENUM
+		WHERE ID = #{id} AND password = #{password}
 	</select>
+	
+	<resultMap type="MemberDTO" id="getLogin">
+		<id column="MEMBERNUM" property="memberNum"/>
+		<result column="ID" property="id"/>
+		<result column="PASSWORD" property="password"/>
+		<result column="NAME" property="name"/>
+		<result column="NICKNAME" property="nickname"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PHONE" property="phone"/>
+		<result column="MAIN_ADDRESS" property="main_address"/>
+		<result column="DETAIL_ADDRESS" property="detail_address"/>
+		<result column="POSTCODE" property="postcode"/>
+		<result column="BIRTHDAY" property="birthday"/>
+		<result column="CASH" property="cash"/>
+		<result column="JOINDATE" property="joinDate"/>
+		<collection property="roleDTOs" javaType="List" ofType="RoleDTO">
+			<id column="ROLENUM" property="roleNum"/>
+			<result column="ROLENAME" property="roleName"/>
+		</collection>
+	</resultMap>
 	
 	<!-- 회원가입 -->
 	<insert id="setJoin" parameterType="MemberDTO">
@@ -16,8 +46,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<selectKey keyProperty="memberNum" order="BEFORE" resultType="Long">
             SELECT MEMBER_SEQ.NEXTVAL FROM DUAL
       </selectKey>
-		INSERT INTO MEMBER(MEMBERNUM, ID, PASSWORD, NAME, NICKNAME, EMAIL, PHONE, JOINDATE, CASH, BIRTHDAY, ADDRESS, POSTCODE)
-		VALUES(#{memberNum}, #{id}, #{password}, #{name}, #{nickname}, #{email}, #{phone}, SYSDATE, 0, #{birthday}, #{address}, #{postcode})
+		INSERT INTO MEMBER(MEMBERNUM, ID, PASSWORD, NAME, NICKNAME, EMAIL, PHONE, JOINDATE, CASH, BIRTHDAY, MAIN_ADDRESS, DETAIL_ADDRESS, POSTCODE)
+		VALUES(#{memberNum}, #{id}, #{password}, #{name}, #{nickname}, #{email}, #{phone}, SYSDATE, 0, #{birthday}, #{main_address}, #{detail_address}, #{postcode})
+	</insert>
+	
+	<insert id="setRoles" parameterType="MemberDTO">
+		INSERT INTO MEMBER_ROLES (ROLENUM, MEMBERNUM)
+		VALUES (2, #{memberNum})
 	</insert>
 	
 	<!-- 파일추가 -->
@@ -44,7 +79,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="NICKNAME" property="nickname"/>
 		<result column="EMAIL" property="email"/>
 		<result column="PHONE" property="phone"/>
-		<result column="ADDRESS" property="address"/>
+		<result column="MAIN_ADDRESS" property="main_address"/>
+		<result column="DETAIL_ADDRESS" property="detail_address"/>
 		<result column="POSTCODE" property="postcode"/>
 		<result column="BIRTHDAY" property="birthday"/>
 		<association property="memberFileDTO" javaType="MemberFileDTO">
@@ -55,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 프로필사진 정보 불러오기 -->
-	<select id="getFileDetail" parameterType="MemberFileDTO">
+	<select id="getFileDetail" parameterType="MemberFileDTO" resultType="MemberFileDTO">
 	 	SELECT * FROM MEMBERIMAGE WHERE FILENUM = #{fileNum}
 	</select>
 	
@@ -66,8 +102,121 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="setInfoUpdate" parameterType="MemberDTO">
 		UPDATE MEMBER SET PASSWORD = #{password}, NAME = #{name}, NICKNAME = #{nickname}, 
+		EMAIL = #{email}, PHONE = #{phone}, MAIN_ADDRESS = #{main_address}, DETAIL_ADDRESS = #{detail_address}, POSTCODE = #{postcode}
+		WHERE MEMBERNUM = #{memberNum}
 	</update>
 	
+	<select id="getMLList" parameterType="MemberDTO" resultMap="getMLList">
+		SELECT M.MEMBERNUM, MI.FILENUM, MI.FILENAME, 
+		ML.MLMNUM , ML.MEETINGBOARDNUM , MB.MEETINGBOARDTITLE 
+		FROM 
+		MEMBER M
+		INNER JOIN
+		MEMBERIMAGE MI
+		ON M.MEMBERNUM = MI.MEMBERNUM
+		LEFT JOIN
+		MEETINGLIKE_MEMBER ML
+		ON M.MEMBERNUM = ML.MEMBERNUM
+		LEFT JOIN
+		MEETINGBOARD MB
+		ON ML.MEETINGBOARDNUM = MB.MEETINGBOARDNUM 
+		WHERE M.MEMBERNUM = #{memberNum}
+	</select>
+	
+	<resultMap type="MemberDTO" id="getMLList">
+		<id column="MEMBERNUM" property="memberNum"/>
+		<association property="memberFileDTO" javaType="MemberFileDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+		</association>
+		<collection javaType="List" ofType="MeetingLikeDTO" property="meetingLikeDTOs">
+			<id column="MLMNUM" property="mlmNum"/>
+			<result column="MEETINGBOARDNUM" property="meetingBoardNum"/>
+		</collection>
+		<collection  javaType="List" ofType="MeetingBoardDTO" property="meetingBoardDTOs">
+			<result column="MEETINGBOARDTITLE" property="meetingBoardTitle"/>
+			<result column="MEETINGBOARDNUM" property="meetingBoardNum"/>
+		</collection>
+	</resultMap>
+	
+	<insert id="setReport" parameterType="ReportDTO">
+		INSERT INTO MEMBERREPORT (NUM, REPORTMEMBERNUM, REPORTNAME, REPORTNICKNAME, REPORTJOINDATE,
+		 REPORTEDMEMBERNUM, REPORTEDNAME, REPORTEDNICKNAME, REPORTEDJOINDATE, REPORTTITLE, REPORTCONTENT)
+		VALUES (MEMBERREPORT_SEQ.NEXTVAL, #{reportMemberNum}, #{reportName}, #{reportNickname},
+		 #{reportJoinDate}, #{reportedMemberNum}, #{reportedName}, #{reportedNickname},
+		 #{reportedJoinDate} ,#{reportTitle}, #{reportContent})
+	</insert>
+	
+	<select id="countReport" parameterType="ReportDTO" resultType="Integer">
+	 	SELECT COUNT(NUM) FROM MEMBERREPORT 
+	 	WHERE REPORTMEMBERNUM = #{reportMemberNum} AND REPORTEDMEMBERNUM = #{reportedMemberNum}
+	</select>
+	
+	<select id="getReportList" parameterType="Pager" resultType="ReportDTO">
+		SELECT * FROM
+			(SELECT ROWNUM R , N.* FROM
+			(SELECT * FROM MEMBERREPORT ORDER BY NUM DESC) N)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<select id="getCount" resultType="Long">
+		SELECT COUNT(REPORTMEMBERNUM) FROM MEMBERREPORT
+	</select>
+	
+	<insert id="setInquiry" parameterType="InquiryDTO">
+		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+			SELECT INQUIRY_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO INQUIRY (NUM, WRITER, TITLE, CONTENTS, REGDATE, REF, STEP)
+		VALUES (#{num}, #{writer}, #{title}, #{contents}, SYSDATE, #{num}, 0)
+	</insert>
+	
+	<insert id="setInquiryReply" parameterType="InquiryDTO">
+		INSERT INTO INQUIRY (NUM, WRITER, TITLE, CONTENTS, REGDATE, REF, STEP)
+		VALUES (INQUIRY_SEQ.NEXT, #{writer}, #{title}, #{contents}, #{regDate}, #{ref}, #{step})
+	</insert>
+	
+	<update id="setStepUpdate" parameterType="InquiryDTO">
+		UPDATE INQUIRY SET STEP=STEP+1 WHERE REF=#{ref} AND STEP > 0
+	</update>
+	
+	<select id="getInquiryList" parameterType="Pager" resultMap="getInquiryList">
+		SELECT * FROM
+			(SELECT ROWNUM R, N.* FROM
+			(SELECT I.*, M.NAME, M.NICKNAME FROM 
+			MEMBER M
+			INNER JOIN
+			INQUIRY I 
+			ON M.MEMBERNUM = I.WRITER
+			ORDER BY NUM DESC) N)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<resultMap type="InquiryDTO" id="getInquiryList">
+		<id column="NUM" property="num"/>
+		<result column="WRITER" property="writer"/>
+		<result column="TITLE" property="title"/>
+		<result column="CONTENTS" property="contents"/>
+		<result column="REGDATE" property="regDate"/>
+		<result column="REF" property="ref"/>
+		<result column="STEP" property="step"/>
+		<association property="memberDTO" javaType="MemberDTO">
+			<result column="NAME" property="name"/>
+			<result column="NICKNAME" property="nickname"/>
+		</association>
+	</resultMap>
+	
+	<select id="getInquiryCount" resultType="Long">
+		SELECT COUNT(NUM) FROM INQUIRY
+	</select>
+	
+	<select id="getReportDetail" parameterType="ReportDTO" resultType="ReportDTO">
+		SELECT REPORTCONTENT FROM MEMBERREPORT WHERE NUM=#{num}
+	</select>
+	
+	<select id="getInquiryDetail" parameterType="InquiryDTO" resultType="InquiryDTO">
+		SELECT CONTENTS FROM INQUIRY WHERE NUM=#{num}
+	</select>
 	
 
 </mapper>

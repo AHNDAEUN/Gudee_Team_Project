@@ -67,4 +67,12 @@ public class MeetingBoardDAO implements MeetingBoardInterface {
 		
 		return sqlSession.delete(NAMESPACE + "setMeetingBoardDelete", meetingBoardDTO);
 	}
+	
+	public int setMeetingBoardCurrentMemberUpdate(MeetingBoardDTO meetingBoardDTO) throws Exception {
+		return sqlSession.update(NAMESPACE + "setMeetingBoardCurrentMemberUpdate", meetingBoardDTO);
+	}
+	
+	public int setMeetingBoardCurrentMemberUpdateMinus(MeetingBoardDTO meetingBoardDTO) throws Exception {
+		return sqlSession.update(NAMESPACE + "setMeetingBoardCurrentMemberUpdateMinus", meetingBoardDTO);
+	}
 }

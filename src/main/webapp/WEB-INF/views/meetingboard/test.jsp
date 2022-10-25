@@ -16,58 +16,15 @@
 	<c:import url="../template/meetingboard/header.jsp"></c:import>
 
 	<section class="container-fluid col-10" id="detailMainSection">
-		<div id="detailTopFrame">
-			<div id="meetingBoardDetailThumnailFrame">
-				<img alt="" src="/resources/images/meetingboard/detail_test_image.jpg" id="meetingBoardDetailThumnail">
+		<div class="commentListItem">
+			<div class="commentItemInfoFrame">
+				<div class="commentItemInfoWriterFrame">
+					<img alt="" src="/resources/images/meetingboard/detail_person_icon.svg" class="commentWriterImage">
+					<div class="commentWriterNickname">닉네임</div>
+				</div>
+				<div class="commentItemContents">댓글 내용</div>
 			</div>
-			<div id="detailInfoFrame">
-				
-				<div class="detailInfoSingleFrame">
-					<img alt="" src="/resources/images/meetingboard/detail_group_icon.svg" style="width:3rem; height:3rem;">
-					<span>4명</span>
-				</div>
-				
-				<div class="detailInfoSingleFrame">
-					<img alt="" src="/resources/images/meetingboard/detail_cash_icon.svg" style="width:3rem; height:3rem;">
-					<span>10000원</span>
-				</div>
-				
-				<div class="detailInfoSingleFrame">
-					<img alt="" src="/resources/images/meetingboard/detail_person_icon.svg" style="width:3rem; height:3rem;">
-					<span>2500원</span>
-				</div>
-				
-				<div class="detailInfoSingleFrame">
-					<img alt="" src="/resources/images/meetingboard/detail_calendar_clock_icon.svg" style="width:3rem; height:3rem;">
-					<span>2022-10-21 15:30</span>
-				</div>
-				
-				<div class="detailInfoSingleFrame">
-					<img alt="" src="/resources/images/meetingboard/map_marker_icon.svg" style="width:3rem; height:3rem;">
-					<span>서울특별시 금천구 가산디지털1로 128 에스티엑스브이타워 1층 스타벅스</span>
-				</div>
-			</div>
-		</div>
-		
-		<div id="detailCenterFrame">
-			<div id="detailTitleFrame">
-				<div id="detailTitleUserFrame">
-					<img alt="" src="/resources/images/meetingboard/detail_person_icon.svg" style="width:5rem; height:5rem;">
-					<span>유저닉네임</span>
-				</div>
-				<div id="detailTitle">타이틀이 들어갈 자리입니다. 테스트를 위해 길게</div>
-			</div>
-			<div id="detailContentsFrame">
-				<div id="detailContents">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi magni veniam vero minus, vitae repellat earum quas aliquam aliquid fugiat sequi laborum aut reprehenderit necessitatibus, repellendus accusamus quisquam recusandae dolorem.
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, expedita sunt consequatur nobis veritatis reiciendis fugiat necessitatibus doloribus voluptate inventore corporis facilis molestias beatae! Ipsam beatae asperiores adipisci. Modi, explicabo!
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo iure fugiat sit consectetur molestias nobis temporibus sapiente, repellendus laudantium, aliquam recusandae sequi in officia veritatis et voluptatum, iste voluptates accusantium.
-					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis atque ea vero non quia minima aspernatur? Natus facilis tempora, praesentium ducimus nostrum quam, dolore itaque quis sapiente quaerat quia inventore.
-					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit quod omnis, nulla cum hic quo, eligendi necessitatibus mollitia minima nemo, esse nesciunt incidunt maiores dolorem. Officiis adipisci cum enim facere?
-					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa minima necessitatibus maxime voluptates rerum praesentium nihil ratione! Doloremque, sequi porro blanditiis totam quisquam, laboriosam illum facere animi, explicabo maiores vitae.
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam suscipit corrupti maxime aliquam aut. Consequatur voluptatem neque quod rerum sequi nulla consectetur omnis quae cumque, exercitationem qui tenetur totam ab?
-				</div>
-			</div>
+			<div class="commentItemDate">날짜</div>
 		</div>
 	</section>
 	

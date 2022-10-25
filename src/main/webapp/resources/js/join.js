@@ -20,7 +20,6 @@ const domainInput = document.querySelector('#domain-txt');
 const birth_year = document.querySelector('#birth-year');
 const birth_month = document.querySelector('#birth-month');
 const birth_day = document.querySelector('#birth-day');
-const address = document.querySelector('#address');
 const addressm = document.querySelector('.addressm');
 const postcode = document.getElementById('postcode');
 const mainAddress = document.getElementById("mainAddress");
@@ -178,9 +177,9 @@ function joinCheck(){
     })
 
     //주소 입력 조건 메세지
-    address.addEventListener('blur', function(){
-        console.log(address.value.length);
-        if(address.value == ''){
+    detailAddress.addEventListener('blur', function(){
+        console.log(detailAddress.value.length);
+        if(detailAddress.value == ''){
             addressm.innerHTML = '주소를 입력해주세요';
         }else{
             addressm.innerHTML = '';
@@ -232,23 +231,23 @@ function joinCheck(){
         //생년월일 합치기
         birthday.value = birth_year.value + '-' + birth_month.value + '-' + birth_day.value;
 
-        //주소 합치기
-        address.value = mainAddress.value + ' ' + detailAddress.value;
         console.log(id.value.length >= 2);
         console.log(pw.value.length >= 4);
         console.log(check);
         console.log(photo.value != '');
         console.log(birthday.value != '');
         console.log(email.value != '');
-        console.log(address.value != '');
+        console.log(mainAddress.value != '');
+        console.log(detailAddress.value != '');
+        console.log(postcode.value != '');
         for(let i = 0; i < cb.length; i++){
             console.log(cb[i].value);
         }
         
-        if(id.value.length >= 2 && pw.value.length >= 4 && check && photo.value != '' && birthday.value != '' && address.value != '' && email.value != ''){
+        if(id.value.length >= 2 && pw.value.length >= 4 && check && photo.value != '' && birthday.value != '' && detailAddress.value != '' && postcode.value != '' && email.value != ''){
             form.submit();
         }else{
-            alert('입력조건을 확인해주세요');
+            alert('입력조건을 확인하시고 빈 칸을 채워주세요');
         }
     });
 }
@@ -286,16 +285,12 @@ function checkPost() {
                 if(extraAddr !== ''){
                     extraAddr = ' (' + extraAddr + ')';
                 }
-                // 조합된 참고항목을 해당 필드에 넣는다.
-                detailAddress.value = extraAddr;
             
-            } else {
-                detailAddress.value = '';
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             postcode.value = data.zonecode;
-            mainAddress.value = addr;
+            mainAddress.value = addr + extraAddr;
             // 커서를 상세주소 필드로 이동한다.
             detailAddress.focus();
         }

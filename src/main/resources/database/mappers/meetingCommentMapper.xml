@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodee.market.meetingboard.comment.MeetingBoardCommentDAO">
+
+	<insert id="commentAdd" parameterType="MeetingBoardCommentDTO">
+		INSERT INTO MEETINGBOARDCOMMENT(MBCWRITER, MBCMEETINGBOARDNUM, MBCCONTENTS) VALUES(#{writer}, #{meetingBoardNum}, #{contents})
+	</insert>
+	
+	<select id="getCommentList" parameterType="MeetingBoardCommentPager" resultMap="getListResult">
+		SELECT *
+		FROM (
+		    SELECT ROWNUM R, J.*
+		    FROM (
+		        SELECT M.membernum, M.id, M.name, M.nickname, MBC.*, MI.filenum, MI.filename
+		        FROM member M
+		        INNER JOIN meetingboardcomment MBC
+		        ON(M.membernum = MBC.mbcwriter)
+		        LEFT JOIN MEMBERIMAGE MI
+                ON(M.membernum = MI.membernum)
+		        WHERE MBC.mbcmeetingboardnum = #{meetingBoardNum}
+		        ORDER BY MBC.mbcnum DESC
+		    ) J)
+		    WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<resultMap type="MeetingBoardCommentDTO" id="getListResult">
+		<id column="MBCNUM" property="num"/>
+		<result column="MBCWRITER" property="writer"/>
+		<result column="MBCMEETINGBOARDNUM" property="meetingBoardNum"/>
+		<result column="MBCCONTENTS" property="contents"/>
+		<result column="MBCREGDATE" property="regDate"/>
+		
+		<association property="memberDTO" javaType="MemberDTO">
+			<id column="MEMBERNUM" property="memberNum"/>
+			<result column="ID" property="id"/>
+			<result column="NAME" property="name"/>
+			<result column="NICKNAME" property="nickname"/>
+		</association>
+		
+		<association property="memberFileDTO" javaType="MemberFileDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+		</association>
+		
+	</resultMap>
+	
+	<delete id="setCommentDelete" parameterType="MeetingBoardCommentDTO">
+		DELETE FROM MEETINGBOARDCOMMENT WHERE MBCNUM = #{num}
+	</delete>
+	
+	<select id="getTotalCount" parameterType="MeetingBoardCommentPager" resultType="Long">
+		SELECT COUNT(mbcnum) FROM meetingboardcomment WHERE mbcmeetingboardnum = #{meetingBoardNum}
+	</select>
+	
+	<select id="getMyCommentList" parameterType="MeetingBoardCommentDTO" resultMap="getMyCommentListResult">
+		SELECT * FROM meetingboardcomment WHERE mbcwriter = #{writer}
+	</select>
+	
+	<resultMap type="MeetingBoardCommentDTO" id="getMyCommentListResult">
+		<id column="MBCNUM" property="num"/>
+		<result column="MBCWRITER" property="writer"/>
+		<result column="MBCMEETINGBOARDNUM" property="meetingBoardNum"/>
+		<result column="MBCCONTENTS" property="contents"/>
+		<result column="MBCREGDATE" property="regDate"/>
+	</resultMap>
+
+</mapper>

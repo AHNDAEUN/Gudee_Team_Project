@@ -1,0 +1,24 @@
+/* @font-face {
+    font-family: 'MICEGothic Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+} */
+
+.box{
+    background-color: #FBF7F2;
+}
+
+.m{
+    color: red;
+}
+
+#mainLogo{
+    width: 100px;
+    height: 28px;
+    cursor: pointer;
+}
+
+option{
+    font-size: 1px !important;
+}

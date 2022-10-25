@@ -1,0 +1,17 @@
+.lists{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 15px;
+    background-color: white;
+}
+
+p{
+    padding: 1rem;
+}
+
+.content{
+    padding-top: 3rem;
+}
+
+#all{
+    background-color: #FBF7F2;
+}

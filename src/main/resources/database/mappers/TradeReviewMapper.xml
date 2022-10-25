@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodee.market.trade.review.ReviewDAO">
+    
+	<!-- 메인 -->
+    <select id="getReviewMain" resultType="ReviewDTO" parameterType="Pager">
+    	SELECT * FROM
+	    (
+	        SELECT ROWNUM R, V.* FROM
+		    	(SELECT * FROM REVIEW
+		           
+		        ORDER BY REVIEWNUM DESC) V
+		)
+		WHERE R BETWEEN #{startRow} and #{lastRow}
+    </select>
+    
+<!-- 
+	파일 추가
+    <insert id="setAddFile" parameterType="ReviewImageDTO" >
+    	 INSERT INTO REVIEWIMAGE
+   		 VALUES(REVIEWIMAGE_SEQ.NEXTVAL,#{reviewNum},#{fileName},#{oriName})
+    </insert>
+ -->    		
+    
+    <!-- 페이지 -->
+    <select id="getCount" resultType="Long" parameterType="Pager">
+    		SELECT COUNT(ITEMNUM) FROM ITEM
+	</select>
+    		
+<!-- 
+	<select id="getDetail" parameterType="reviewDTO" resultMap="getDetailResult">
+		SELECT I.*,IM.*
+ 		FROM ITEM I
+		LEFT JOIN
+			ITEMIMAGE IM
+			ON I.ITEMNUM= IM.ITEMNUM
+		WHERE I.ITEMNUM= #{itemNum}
+	</select>
+		
+	<resultMap type="reviewDTO" id="getDetailResult">
+		<id column="reviewnum" property="reviewNum"/>
+			<result column="membernum" property="memberNum"/>
+			<result column="itemtitle" property="itemTitle"/>
+			<result column="itemcontents" property="itemContents"/>
+			<result column="itemcategory" property="itemCategory"/>
+			<result column="itemprice" property="itemPrice"/>
+			<result column="itemduedate" property="itemDueDate"/>
+			<result column="itemstatus" property="itemStatus"/>
+		<collection property="itemImageDTOs" javaType="List" ofType="ItemImageDTO">
+			<id column="filenum" property="fileNum"/>
+			<result column="filename" property="fileName"/>
+			<result column="oriname" property="oriName"/>
+		</collection>
+	</resultMap>
+		
+		<insert id="setAdd" parameterType="ItemDTO"> 
+			<selectKey order="BEFORE" keyProperty="itemNum" resultType="Long"> 
+				SELECT ITEM_SEQ.NEXTVAL FROM DUAL
+			</selectKey>
+			INSERT INTO ITEM
+  			VALUES (#{itemNum},#{memberNum},#{itemTitle},#{itemContents},#{itemCategory},#{itemPrice},#{itemDueDate},#{itemStatus})
+		</insert>
+	
+		<update id="setUpdate" parameterType="ItemDTO">
+			UPDATE ITEM SET ITEMTITLE = #{itemTitle},ITEMCONTENTS=#{itemContents},ITEMCATEGORY=#{itemCategory},ITEMPRICE=#{itemPrice} WHERE ITEMNUM=#{itemNum}
+		</update>
+		
+		<delete id="setDelete" parameterType="ItemDTO">
+			DELETE ITEM WHERE ITEMNUM=#{itemNum}
+		</delete>   -->  
+</mapper>    

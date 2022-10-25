@@ -2,9 +2,90 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.goodee.market.trade.item.ItemDAO">
     
-    <mapper namespace="com.goodee.market.item.ItemDAO">
+    
+    
+     <sql id="select">
+		WHERE
+			<choose>
+				<when test="select == 'title'">ITEMTITLE</when>
+				<otherwise>ITEMCONTENTS</otherwise>
+			</choose>
+		LIKE '%'||#{select}||'%'
+	</sql>
+    
+    
+    
+	<select id="getFileDetail" resultType="ItemImageDTO" parameterType="ItemImageDTO">
+		SELECT * FROM ITEMIMAGE WHERE FILENUM=#{fileNum}
+	</select>
+	
+    <delete id="getFileDelete" parameterType="ItemImageDTO">
+    DELETE ITEMIMAGE WHERE FILENUM= #{fileNum}
+    </delete>
+    
+    
+    <delete id="setFileDelete" parameterType="ItemImageDTO" >
+    DELETE ITEMIMAGE WHERE FILENUM= #{fileNum}
+    
+    </delete>
+    	<!-- 메인 -->
+    	<select id="getTradeMain" resultType="itemDTO" parameterType="Pager">
+    		SELECT * FROM
+		    (
+		        SELECT ROWNUM R, I.* FROM
+		            (SELECT * FROM ITEM 
+		            
+		             ORDER BY ITEMNUM DESC) I
+		    )
+			WHERE R BETWEEN #{startRow} and #{lastRow}
+    	</select>
+    
+    	<!-- 카테고리 메인 -->
+ 		<select id="getList" resultType="itemDTO" parameterType="Pager">
+		 	SELECT * FROM
+		    (
+		        SELECT ROWNUM R, I.* FROM
+		            (SELECT * FROM ITEM 
+		            	<include refid="select"></include>
+		             ORDER BY ITEMNUM DESC) I
+		    )
+			WHERE R BETWEEN #{startRow} and #{lastRow}		 	
+		</select>
+		
 
+		<!-- 찜 목록 -->
+		<select id="getHeartList" resultType="itemDTO" parameterType="itemDTO">
+		 	SELECT IM.NUM,I.ITEMTITLE,I.ITEMCONTENTS,I.ITEMCATEGORY,I.ITEMPRICE
+            FROM ITEM I
+            
+            INNER JOIN
+            	ITEMLIKE_MEMBER IM
+            ON I.ITEMNUM= IM.ITEMNUM
+            
+            INNER JOIN
+            	MEMBER M
+            ON M.MEMBERNUM= IM.MEMBERNUM
+            
+            WHERE M.MEMBERNUM=3	 	
+		</select>
+
+
+    	<insert id="setAddFile" parameterType="ItemImageDTO" >
+    		 INSERT INTO ITEMIMAGE
+    		 VALUES(ITEMIMAGE_SEQ.NEXTVAL,#{itemNum},#{fileName},#{oriName})
+    	</insert>
+    		
+    	<select id="getCount" resultType="Long" parameterType="Pager">
+    			SELECT COUNT(ITEMNUM) FROM ITEM
+		</select>
+    		
+    	
+    	<select id="getMainCount" resultType="Long" parameterType="MainPager">
+    			SELECT COUNT(ITEMNUM) FROM ITEM
+		</select>	
+    		
 
 		<select id="getDetail" parameterType="ItemDTO" resultMap="getDetailResult">
 			 SELECT I.*,IM.*
@@ -12,8 +93,9 @@
 			 LEFT JOIN
 			 ITEMIMAGE IM
 			 ON I.ITEMNUM= IM.ITEMNUM
-			 WHERE I.ITEMNUM= #{itemNum};
+			 WHERE I.ITEMNUM= #{itemNum}
 		</select>
+		
 		<resultMap type="ItemDTO" id="getDetailResult">
 		<id column="itemnum" property="itemNum"/>
 				<result column="membernum" property="memberNum"/>
@@ -23,22 +105,26 @@
 				<result column="itemprice" property="itemPrice"/>
 				<result column="itemduedate" property="itemDueDate"/>
 				<result column="itemstatus" property="itemStatus"/>
-				
+				<collection property="itemImageDTOs" javaType="List" ofType="ItemImageDTO">
+				<id column="filenum" property="fileNum"/>
+				<result column="filename" property="fileName"/>
+				<result column="oriname" property="oriName"/>
+				</collection>
 		</resultMap>
 		
-		<insert id="setAdd" parameterType="ItemDTO">
-		<selectKey order="BEFORE" keyProperty="itemNum" resultType="Long">
-			  SELECT ITEM_SEQ.NEXTVAL FROM DUAL
-		</selectKey>
-		INSERT INTO ITEM
-  		VALUES (ITEM_SEQ.NEXTVAL,#{memberNum}, #{itemTitle},#{itemContents},#{itemCategory},#{itemPrice},#{itemDueDate},#{itemStatus})
+		<insert id="setAdd" parameterType="ItemDTO"> 
+			<selectKey order="BEFORE" keyProperty="itemNum" resultType="Long"> 
+				SELECT ITEM_SEQ.NEXTVAL FROM DUAL
+			</selectKey>
+			INSERT INTO ITEM
+  			VALUES (#{itemNum},#{memberNum},#{itemTitle},#{itemContents},#{itemCategory},#{itemPrice}, sysdate, 1)
 		</insert>
 	
 		<update id="setUpdate" parameterType="ItemDTO">
-		  UPDATE ITEM SET ITEMTITLE = #{itemTitle},ITEMCONTENTS=#{itemContents},ITEMCATEGORY=#{itemCategory},ITEMPRICE=#{itemPrice} WHERE ITEMNUM=#{itemNum}
+			UPDATE ITEM SET ITEMTITLE = #{itemTitle},ITEMCONTENTS=#{itemContents},ITEMCATEGORY=#{itemCategory},ITEMPRICE=#{itemPrice} WHERE ITEMNUM=#{itemNum}
 		</update>
 		
 		<delete id="setDelete" parameterType="ItemDTO">
-		DELETE ITEM WHERE ITEMNUM=#{itemNum}
+			DELETE ITEM WHERE ITEMNUM=#{itemNum}
 		</delete>
 	</mapper>

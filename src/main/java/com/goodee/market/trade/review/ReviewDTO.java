@@ -8,9 +8,10 @@ public class ReviewDTO extends ItemDTO{
 	//memberNum
 	
 	private Long reviewNum;
-	private Long realBuyer;
 	private String reviewTitle;
 	private String reviewContent;
+	private Integer reviewHit;
+	private Integer reviewStar;
 	
 //-----------------------------------------------	
 	public Long getReviewNum() {
@@ -19,12 +20,7 @@ public class ReviewDTO extends ItemDTO{
 	public void setReviewNum(Long reviewNum) {
 		this.reviewNum = reviewNum;
 	}
-	public Long getRealBuyer() {
-		return realBuyer;
-	}
-	public void setRealBuyer(Long realBuyer) {
-		this.realBuyer = realBuyer;
-	}
+	
 	public String getReviewTitle() {
 		return reviewTitle;
 	}
@@ -37,6 +33,19 @@ public class ReviewDTO extends ItemDTO{
 	public void setReviewContent(String reviewContent) {
 		this.reviewContent = reviewContent;
 	}
+	public Integer getReviewHit() {
+		return reviewHit;
+	}
+	public void setReviewHit(Integer reviewHit) {
+		this.reviewHit = reviewHit;
+	}
+	public Integer getReviewStar() {
+		return reviewStar;
+	}
+	public void setReviewStar(Integer reviewStar) {
+		this.reviewStar = reviewStar;
+	}
+	
 	
 	
 

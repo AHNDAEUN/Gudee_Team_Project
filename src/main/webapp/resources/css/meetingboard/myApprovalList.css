@@ -1,0 +1,80 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'MICEGothic Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'MICEMyungjo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEMyungjo.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'HS-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/HS-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	background-image: url('/resources/images/meetingboard/circle-scatter-listitem.svg');
+}
+
+#listMainSection {
+	margin: 5rem auto 0 auto;
+}
+
+#approvalListFrame{
+	width: 48%;
+	padding-top: 1rem;
+	display: inline-block;
+}
+
+.approvalListItem {
+	border-radius: 1rem;
+	background-color: #E1FFFA;
+	margin: 1rem auto;
+	padding: 0.5rem;
+	display: flex;
+	flex-direction: row;
+}
+
+.approvalListItem > div {
+	display: flex;
+	flex-direction: column;
+	padding-top: 0.5rem;
+	margin: 0 0 0 0.5rem;
+}
+
+.approvalListItemThumnail {
+	width: 8rem;
+	height: 8rem;
+	margin-top: 1rem;
+}
+
+.approvalListItemNickname {
+	font-family: 'HS-Regular';
+	font-size: 1.5rem;
+	text-decoration: none;
+	cursor: pointer;
+	height: 1.5rem;
+	overflow: hidden;
+}
+
+.approvalListItemHostDemand {
+	display: inline-block;
+	margin: 0 0 0 0;
+	font-family: 'MICEGothic Bold';
+	font-size: 1.3rem;
+}
+
+.approvalListItemApprovalContents {
+	margin-top: 0.5rem;
+	margin-bottom: 0;
+	font-family: 'MICEMyungjo';
+	font-size: 1.3rem;
+	width: 100%;
+	overflow: hidden;
+}

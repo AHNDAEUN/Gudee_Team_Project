@@ -7,24 +7,31 @@
 
 	<!-- 판매리스트 -->
 	<select id="getSellItemList" resultType="ItemDTO" parameterType="ItemDTO">	
-		SELECT ITEMNUM, ITEMCATEGORY, ITEMTITLE, ITEMPRICE, ITEMSTATUS FROM ITEM
-		    WHERE ITEMNUM
-		        =(SELECT ITEMNUM FROM SELLITEMLIST WHERE MEMBERNUM = 3)
+		SELECT I.ITEMTITLE, I.ITEMPRICE, M.MEMBERNICKNAME
+		FROM ITEM I
+             INNER JOIN
+             ITEMLIKE_MEMBER IM
+             ON I.ITEMNUM= IM.ITEMNUM
+             
+             INNER JOIN
+             MEMBER M
+             ON M.MEMBERNUM= IM.MEMBERNUM
+             WHERE M.MEMBERNUM=#{memberNum};
 	</select>
 	
 	
 	<!-- 구매리스트 -->
 	<select id="getBuyItemList" resultType="ItemDTO" parameterType="BuyerDTO">
-		SELECT ITEMCATEGORY, ITEMTITLE, ITEMPRICE, MEMBERNUM, ITEMSTATUS FROM ITEM
+		SELECT * FROM ITEM
 		    WHERE ITEMNUM
-		        =(SELECT ITEMNUM FROM BUYITEMLIST WHERE REALBUYER = 5)
+		        =(SELECT ITEMNUM FROM BUYITEMLIST WHERE MEMBERNUM=#{memberNum})
 	</select>
 	
 	
 	<!-- 후기리스트 -->
 	<select id="getReviewList" resultType="ReviewDTO" parameterType="ReviewDTO">
-		SELECT REVIEWNUM, REVIEWTITLE, MEMBERNUM, ITEMNUM FROM REVIEW
-			WHERE REALBUYER = 5
+		SELECT * FROM REVIEW
+			WHERE MEMBERNUM = #{memberNum}
 	</select>
 	
 </mapper>	

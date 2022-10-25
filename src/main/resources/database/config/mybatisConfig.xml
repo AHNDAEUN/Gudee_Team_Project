@@ -5,26 +5,42 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.goodee.market.member.MemberDTO" alias="MemberDTO"/>
-		<typeAlias type="com.goodee.market.trade.buyer.BuyerDTO" alias="BuyerDTO"/>
-		<typeAlias type="com.goodee.market.trade.buyItemList.BuyItemListDTO" alias="BuyItemListDTO"/>
-		<typeAlias type="com.goodee.market.trade.item.ItemImageDTO" alias="ItemImageDTO"/>
-		<typeAlias type="com.goodee.market.trade.item.ItemLike_MemberDTO" alias="ItemLike_MemberDTO"/>
-		<typeAlias type="com.goodee.market.trade.review.ReviewDTO" alias="ReviewDTO"/>
-		<typeAlias type="com.goodee.market.trade.sellItemList.SellItemListDTO" alias="SellItemListDTO"/>
-		<typeAlias type="com.goodee.market.trade.tradingItem.TradingItemDTO" alias="TradingItemDTO"/>
+		<typeAlias type="com.goodee.market.util.Pager" alias="Pager"/>
+		<typeAlias type="com.goodee.market.util.MainPager" alias="MainPager"/>
 		<typeAlias type="com.goodee.market.util.FileDTO" alias="FileDTO"/>
-		<typeAlias type="com.goodee.market.item.ItemDTO" alias="ItemDTO"/>
-		<typeAlias type="com.goodee.market.item.ItemDAO" alias="ItemDAO"/>
+		<typeAlias type="com.goodee.market.trade.item.ItemDTO" alias="ItemDTO"/>
+		<typeAlias type="com.goodee.market.trade.item.ItemDAO" alias="ItemDAO"/>
+		<typeAlias type="com.goodee.market.trade.item.ItemImageDTO" alias="ItemImageDTO"/>
+		<typeAlias type="com.goodee.market.trade.item.like.ItemLike_MemberDTO" alias="ItemLike_MemberDTO"/>
+		<typeAlias type="com.goodee.market.trade.buyer.BuyerDTO" alias="BuyerDTO"/>
+		<typeAlias type="com.goodee.market.trade.sellItemList.SellItemListDTO" alias="SellItemListDTO"/>
+		<typeAlias type="com.goodee.market.trade.buyItemList.BuyItemListDTO" alias="BuyItemListDTO"/>
+		<typeAlias type="com.goodee.market.trade.review.ReviewDTO" alias="ReviewDTO"/>
+		<typeAlias type="com.goodee.market.trade.tradingItem.TradingItemDTO" alias="TradingItemDTO"/>
+		<typeAlias type="com.goodee.market.member.MemberDTO" alias="MemberDTO"/>
 		<typeAlias type="com.goodee.market.member.MemberFileDTO" alias="MemberFileDTO"/>
+		<typeAlias type="com.goodee.market.member.ReportDTO" alias="ReportDTO"/>
+		<typeAlias type="com.goodee.market.member.RoleDTO" alias="RoleDTO"/>
+		<typeAlias type="com.goodee.market.member.InquiryDTO" alias="InquiryDTO"/>
+		
 		<typeAlias type="com.goodee.market.meetingboard.MeetingBoardDTO" alias="MeetingBoardDTO"/>
 		<typeAlias type="com.goodee.market.meetingboard.MeetingBoardImageDTO" alias="MeetingBoardImageDTO"/>
 		<typeAlias type="com.goodee.market.meetingboard.util.MeetingBoardPager" alias="MeetingBoardPager"/>
+		<typeAlias type="com.goodee.market.meetingboard.like.MeetingLikeDTO" alias="MeetingLikeDTO"/>
+		<typeAlias type="com.goodee.market.meetingboard.comment.MeetingBoardCommentDTO" alias="MeetingBoardCommentDTO"/>
+		<typeAlias type="com.goodee.market.meetingboard.util.MeetingBoardCommentPager" alias="MeetingBoardCommentPager"/>
+		<typeAlias type="com.goodee.market.meetingboard.member.MeetingBoardMemberDTO" alias="MeetingBoardMemberDTO"/>
+		<typeAlias type="com.goodee.market.meetingboard.util.MeetingBoardMemberPager" alias="MeetingBoardMemberPager"/>
+		
+		<typeAlias type="com.goodee.market.util.MainPager" alias="MainPager"/>
+				<typeAlias type="com.goodee.market.util.Pager" alias="Pager"/>
 		
 		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="java.lang.Integer" alias="Integer"/>
 		<typeAlias type="java.util.List" alias="List"/>
 		<typeAlias type="java.lang.Long" alias="Long"/>
+		
+		
 
 	</typeAliases>
 

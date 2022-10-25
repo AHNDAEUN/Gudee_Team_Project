@@ -1,0 +1,68 @@
+.erdBody {
+    position: relative;
+    /* overflow: hidden; */
+    padding-top: 190px;
+    line-height: 170%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.erdTop {
+    padding-bottom: 80px;
+}
+
+.erdContainer {
+    max-width: 960px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.erdRow {
+    margin-right: -15px;
+    margin-left: -15px;
+    box-sizing: border-box;
+}
+
+.erdlogo {
+    width: 100%;
+    height: 20rem;
+}
+
+.erdlogoimg {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    top: 2%;
+    left: 35%;
+}
+
+.erdair {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-top: 1px solid #ebebeb;
+}
+
+.erd-row-con {
+    margin-top: 2rem;
+}
+
+.erdtitle {
+    font-weight: bold;
+    position: relative;
+    align-items: center;
+    padding: 1rem 1rem 0 1rem;
+}
+
+.erd-img {
+    width: 100%;
+    padding: 1rem 1rem 2rem 1rem;
+    position: relative;
+}
+
+.erd-tec{
+    margin: 1rem 2rem 3rem 4rem;
+    border-top: 1px solid #ebebeb;
+    padding-top: 1.5rem;
+}

@@ -1,0 +1,184 @@
+.heartListBody {
+    position: relative;
+    /* overflow: hidden; */
+    padding-top: 190px;
+    padding-bottom: 80px;
+    line-height: 170%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.hl-container {
+    max-width: 960px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    box-sizing: border-box;
+}
+
+.hl-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    box-sizing: border-box;
+}
+
+.col-lg-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    box-sizing: border-box;
+}
+
+.hl-table {
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.hl-table table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+.hl-table thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.hl-table table thead tr {
+    border-bottom: 1px solid #ebebeb;
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.hl-table table thead th {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1c1c1c;
+    padding-bottom: 20px;
+    text-align: inherit;
+}
+
+.hl-title {
+    text-align: left;
+}
+
+.hl-tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.hl-tbody tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.hl-price, .hl-quantity, .hl-seller, .hl-close {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ebebeb;
+    font-size: 18px;
+    color: #1c1c1c;
+    font-weight: 700;
+    width: 100px;
+}
+
+.hl-item {
+    display: table-cell;
+    vertical-align: inherit;
+    box-sizing: border-box;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ebebeb;
+    text-align: left;
+}
+
+.hl-img {
+    display: inline-block;
+    margin-right: 25px;
+    max-width: 100%;
+    vertical-align: middle;
+    border-style: none;
+    box-sizing: border-box;
+}
+
+.hl-text {
+    display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    color: #111111;
+    font-weight: 400;
+}
+
+.hl-price {
+    font-size: 18px;
+    color: #1c1c1c;
+    font-weight: 700;
+    width: 100px;
+}
+
+.hl-table table tbody tr td.hl-quantity {
+    width: 225px;
+}
+
+.hltable table tbody tr td.hl-quantity .pro-qty {
+    width: 120px;
+    height: 40px;
+}
+
+.pro-qty {
+    width: 120px;
+    height: 50px;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    background: #f5f5f5;
+    margin-bottom: 5px;
+}
+
+.pro-qty .qtybtn {
+    width: 15px;
+    font-size: 16px;
+    color: #6f6f6f;
+    cursor: pointer;
+    display: inline-block;
+}    
+
+.pro-qty input {
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    color: #1c1c1c;
+    width: 50px;
+    border: none;
+    background: #f5f5f5;
+    text-align: center;
+}
+
+.hl-table table tbody tr td.hl-seller {
+    font-size: 18px;
+    color: #1c1c1c;
+    font-weight: 700;
+    width: 110px;
+}
+
+.hl-table table tbody tr td.hl-close {
+    text-align: right;
+}
+
+.hl-table table tbody tr td.hl-close span {
+    font-size: 24px;
+    color: #b2b2b2;
+    cursor: pointer;
+}

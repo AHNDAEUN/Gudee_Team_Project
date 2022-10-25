@@ -16,7 +16,7 @@
 <body>
 
 	<div class="container-fluid">
-		<div class="row" id="mapFrame">
+		<div class="row" id="mapFrame" data-mainaddr="${sessionScope.member.main_address }">
 			<div class="col-lg-3 col-md-3" id="searchFrame">
 				<div class="searchBox container-fluid">
 					<img alt="" src="/resources/images/meetingboard/map_search_view_icon.svg" id="searchIcon">

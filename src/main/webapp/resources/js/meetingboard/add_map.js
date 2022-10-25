@@ -11,6 +11,7 @@ let places = new kakao.maps.services.Places();
 const inputKeyword = document.querySelector("#inputKeyword");   //검색어
 const searchIcon = document.querySelector("#searchIcon");       //검색아이콘
 const addFormModalOpenBtn = document.querySelector("#addFormModalOpenBtn"); //등록폼 버튼
+const mapFrame = document.querySelector("#mapFrame");
 
 places.setMap(map);
 
@@ -19,6 +20,20 @@ let infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 // 주소-좌표 변환 객체를 생성합니다
 let geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch(mapFrame.getAttribute("data-mainaddr"), function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        let firstCoords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(firstCoords);
+    } 
+});
+
 // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
 searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 

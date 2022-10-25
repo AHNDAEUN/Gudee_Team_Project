@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.goodee.market.meetingboard.like.MeetingLikeDTO;
+import com.goodee.market.meetingboard.like.MeetingLikeService;
+import com.goodee.market.meetingboard.member.MeetingBoardMemberDTO;
+import com.goodee.market.meetingboard.member.MeetingBoardMemberService;
 import com.goodee.market.meetingboard.util.MeetingBoardPager;
 import com.goodee.market.member.MemberDTO;
 
@@ -24,6 +28,12 @@ public class MeetingBoardController {
 	
 	@Autowired
 	private MeetingBoardService meetingBoardService;
+	
+	@Autowired
+	private MeetingLikeService meetingLikeService;
+	
+	@Autowired
+	private MeetingBoardMemberService meetingBoardMemberService;
 	
 	@GetMapping("test")
 	public String getTest() throws Exception {
@@ -47,13 +57,35 @@ public class MeetingBoardController {
 	}
 	
 	@GetMapping("detail")
-	public ModelAndView getMeetingBoardDetail(Long num) throws Exception {
+	public ModelAndView getMeetingBoardDetail(Long num, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
 		MeetingBoardDTO meetingBoardDTO = new MeetingBoardDTO();
 		meetingBoardDTO.setMeetingBoardNum(num);
 		meetingBoardDTO = meetingBoardService.getMeetingBoardDetail(meetingBoardDTO);
 		
-		ModelAndView mv = new ModelAndView();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		
+		if(memberDTO == null) {
+			mv.setViewName("redirect: /member/login");
+			return mv;
+		}
+		
+		MeetingLikeDTO meetingLikeDTO = new MeetingLikeDTO();
+		meetingLikeDTO.setMeetingBoardNum(num);
+		meetingLikeDTO.setMemberNum(memberDTO.getMemberNum());
+		
+		boolean isLikeExist = meetingLikeService.getLikeExist(meetingLikeDTO);
+		
+		MeetingBoardMemberDTO meetingBoardMemberDTO = new MeetingBoardMemberDTO();
+		meetingBoardMemberDTO.setMeetingBoardNum(num);
+		meetingBoardMemberDTO.setRequestMemberNum(memberDTO.getMemberNum());
+		
+		boolean isJoinExist = meetingBoardMemberService.getJoinExist(meetingBoardMemberDTO);
+		
 		mv.addObject("meetingBoardDetail", meetingBoardDTO);
+		mv.addObject("isLikeExist", isLikeExist);
+		mv.addObject("isJoinExist", isJoinExist);
 		mv.setViewName("meetingboard/detail");
 		return mv;
 	}
@@ -72,7 +104,16 @@ public class MeetingBoardController {
 	@PostMapping("add")
 	public String setAddPage(MeetingBoardDTO meetingBoardDTO, MultipartFile meetingBoardThumnail, HttpSession session) throws Exception {
 		
-		meetingBoardService.setMeetingBoardAdd(meetingBoardDTO, meetingBoardThumnail, session.getServletContext());
+		int result = meetingBoardService.setMeetingBoardAdd(meetingBoardDTO, meetingBoardThumnail, session.getServletContext());
+		
+		if(result > 0) {
+			MeetingBoardMemberDTO meetingBoardMemberDTO = new MeetingBoardMemberDTO();
+			meetingBoardMemberDTO.setMeetingBoardNum(meetingBoardDTO.getMeetingBoardNum());
+			meetingBoardMemberDTO.setHostMemberNum(meetingBoardDTO.getMeetingBoardWriter());
+			meetingBoardMemberDTO.setRequestMemberNum(meetingBoardDTO.getMeetingBoardWriter());
+			
+			meetingBoardMemberService.setAddOwnerMeetingBoardMember(meetingBoardMemberDTO);
+		}
 		
 		return "redirect:./list";
 	}

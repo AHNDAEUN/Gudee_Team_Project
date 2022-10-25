@@ -20,6 +20,7 @@
     width: 100px;
     height: 50px;
     cursor: pointer;
+    visibility: hidden;
 }
 
 #logoText {

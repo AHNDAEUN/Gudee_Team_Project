@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodee.market.meetingboard.member.MeetingBoardMemberDAO">
+
+	<insert id="setAddMeetingBoardMember" parameterType="MeetingBoardMemberDTO">
+		INSERT INTO MEETINGBOARD_MEMBER(HOSTMEMBERNUM, MEETINGBOARDNUM, REQUESTMEMBERNUM, APPROVALCONTENTS)
+		VALUES(#{hostMemberNum}, #{meetingBoardNum}, #{requestMemberNum}, #{approvalContents})
+	</insert>
+	
+	<insert id="setAddOwnerMeetingBoardMember" parameterType="MeetingBoardMemberDTO">
+		INSERT INTO MEETINGBOARD_MEMBER(HOSTMEMBERNUM, MEETINGBOARDNUM, REQUESTMEMBERNUM, APPROVALSTATUS)
+		VALUES(#{hostMemberNum}, #{meetingBoardNum}, #{requestMemberNum}, 1)
+	</insert>
+	
+	<select id="getJoinExist" parameterType="MeetingBoardMemberDTO" resultType="Long">
+		SELECT COUNT(MBMNUM) FROM meetingboard_member WHERE meetingboardnum = #{meetingBoardNum} AND requestmembernum = #{requestMemberNum}
+	</select>
+	
+	<delete id="setDeleteMeetingBoardMember" parameterType="MeetingBoardMemberDTO">
+		DELETE FROM meetingboard_member WHERE HOSTMEMBERNUM = #{hostMemberNum} AND meetingboardnum = #{meetingBoardNum} AND requestmembernum = #{requestMemberNum}
+	</delete>
+	
+	<select id="getMyList" parameterType="MeetingBoardMemberPager" resultMap="getMyListResult">
+		SELECT * 
+		FROM (
+		    SELECT ROWNUM R, MB.*, MBI.filenum, MBI.filename
+		    FROM MEETINGBOARD MB
+		    LEFT JOIN MEETINGBOARDIMAGE MBI
+		    ON (MB.MEETINGBOARDNUM = MBI.MEETINGBOARDNUM)
+		    WHERE MEETINGBOARDWRITER = #{hostMemberNum} AND MEETINGBOARDDUEDATE >= sysdate AND MEETINGBOARDSTATUS = 0
+		    	AND <choose>
+		    		<when test="kind == 'category'">meetingboardcategory</when>
+		    		<otherwise>meetingboardtitle</otherwise>
+		    	</choose>
+		    	LIKE '%' || #{search} || '%'
+		    ORDER BY MB.MEETINGBOARDNUM DESC
+		) WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<resultMap type="MeetingBoardDTO" id="getMyListResult">
+		<id column="MEETINGBOARDNUM" property="meetingBoardNum"/>
+		<result column="MEETINGBOARDWRITER" property="meetingBoardWriter"/>
+		<result column="MEETINGBOARDTITLE" property="meetingBoardTitle"/>
+		<result column="MEETINGBOARDCONTENTS" property="meetingBoardContents"/>
+		<result column="MEETINGBOARDDUEDATE" property="meetingBoardDueDate"/>
+		<result column="MEETINGBOARDTOTALCOST" property="meetingBoardTotalCost"/>
+		<result column="MEETINGBOARDLOCATION" property="meetingBoardLocation"/>
+		<result column="MEETINGBOARDCURRENTMEMBER" property="meetingBoardCurrentMember"/>
+		<result column="MEETINGBOARDMAXMEMBER" property="meetingBoardMaxMember"/>
+		<result column="MEETINGBOARDCATEGORY" property="meetingBoardCategory"/>
+		<result column="MEETINGBOARDHOSTDEMAND" property="meetingBoardHostDemand"/>
+		
+		<association property="meetingBoardImageDTO" javaType="MeetingBoardImageDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+		</association>
+		
+	</resultMap>
+	
+	<select id="getMyListCount" parameterType="MeetingBoardMemberPager" resultType="Long">
+		SELECT COUNT(MEETINGBOARDNUM) FROM MEETINGBOARD WHERE MEETINGBOARDWRITER = #{hostMemberNum} AND MEETINGBOARDDUEDATE >= sysdate AND MEETINGBOARDSTATUS = 0
+	</select>
+	
+	<select id="getMyApprovalCount" parameterType="MeetingBoardMemberDTO" resultType="Long">
+		SELECT COUNT(MBMNUM) FROM MEETINGBOARD_MEMBER WHERE HOSTMEMBERNUM = #{hostMemberNum} AND MEETINGBOARDNUM = #{meetingBoardNum} AND APPROVALSTATUS = 0
+	</select>
+	
+	<select id="getMyApprovalList" parameterType="MeetingBoardMemberPager" resultMap="getMyApprovalListResult">
+		SELECT * FROM(
+		    SELECT ROWNUM R, MBM.*, M.id, M.name, M.nickname, MB.meetingboardhostdemand, MI.filenum, MI.filename 
+		    FROM MEETINGBOARD_MEMBER MBM
+		    INNER JOIN MEMBER M
+		    ON (MBM.REQUESTMEMBERNUM = M.MEMBERNUM)
+		    INNER JOIN MEETINGBOARD MB
+		    ON (MBM.MEETINGBOARDNUM = MB.MEETINGBOARDNUM)
+		    LEFT JOIN MEMBERIMAGE MI
+		    ON (M.MEMBERNUM = MI.MEMBERNUM)
+		    WHERE MBM.HOSTMEMBERNUM = #{hostMemberNum} AND MBM.MEETINGBOARDNUM = #{meetingBoardNum} AND APPROVALSTATUS = 0)
+	    WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<resultMap type="MeetingBoardMemberDTO" id="getMyApprovalListResult">
+		<id column="MBMNUM" property="mbmNum"/>
+		<result column="HOSTMEMBERNUM" property="hostMemberNum"/>
+		<result column="MEETINGBOARDNUM" property="meetingBoardNum"/>
+		<result column="REQUESTMEMBERNUM" property="requestMemberNum"/>
+		<result column="APPROVALSTATUS" property="approvalStatus"/>
+		<result column="APPROVALCONTENTS" property="approvalContents"/>
+		
+		<association property="memberDTO" javaType="MemberDTO">
+			<result column="ID" property="id"/>
+			<result column="NAME" property="name"/>
+			<result column="NICKNAME" property="nickname"/>
+		</association>
+		
+		<association property="meetingBoardDTO" javaType="MeetingBoardDTO">
+			<result column="MEETINGBOARDHOSTDEMAND" property="meetingBoardHostDemand"/>
+		</association>
+		
+		<association property="memberFileDTO" javaType="MemberFileDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+		</association>
+		
+	</resultMap>
+	
+	<update id="setApprovalAccept" parameterType="MeetingBoardMemberDTO">
+		UPDATE MEETINGBOARD_MEMBER SET APPROVALSTATUS = 1 WHERE MBMNUM = #{mbmNum}
+	</update>
+	
+	<update id="setApprovalDenie" parameterType="MeetingBoardMemberDTO">
+		UPDATE MEETINGBOARD_MEMBER SET APPROVALSTATUS = 2 WHERE MBMNUM = #{mbmNum}
+	</update>
+	
+	<select id="getDetailJoinList" parameterType="MeetingBoardMemberDTO" resultMap="getDetailJoinListResult">
+		SELECT M.MEMBERNUM, M.ID, M.NAME, M.NICKNAME, MBM.MBMNUM, MI.FILENUM, MI.FILENAME 
+		FROM MEMBER M
+		INNER JOIN MEETINGBOARD_MEMBER MBM
+		ON (M.MEMBERNUM = MBM.REQUESTMEMBERNUM)
+		LEFT JOIN MEMBERIMAGE MI
+		ON (M.MEMBERNUM = MI.MEMBERNUM)
+		WHERE MBM.MEETINGBOARDNUM = #{meetingBoardNum} AND MBM.APPROVALSTATUS = 1
+		ORDER BY MBM.MBMNUM ASC
+	</select>
+	
+	<resultMap type="MeetingBoardMemberDTO" id="getDetailJoinListResult">
+		<id column="MBMNUM" property="mbmNum"/>
+		
+		<association property="memberDTO" javaType="MemberDTO">
+			<id column="MEMBERNUM" property="memberNum"/>
+			<result column="ID" property="id"/>
+			<result column="NAME" property="name"/>
+			<result column="NICKNAME" property="nickname"/>
+		</association>
+		
+		<association property="memberFileDTO" javaType="MemberFileDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+		</association>
+		
+	</resultMap>
+	
+	<select id="getMeetingBoardMemberStatus" parameterType="MeetingBoardMemberDTO" resultType="Integer">
+		SELECT APPROVALSTATUS FROM MEETINGBOARD_MEMBER WHERE REQUESTMEMBERNUM = #{requestMemberNum} AND MEETINGBOARDNUM = #{meetingBoardNum}
+	</select>
+	
+	<select id="getAllApprovalCount" parameterType="MeetingBoardMemberDTO" resultType="Integer">
+		SELECT COUNT(MBMNUM) FROM MEETINGBOARD_MEMBER WHERE HOSTMEMBERNUM = #{hostMemberNum} AND APPROVALSTATUS = 0
+	</select>
+	
+	<select id="getSoonListCount" parameterType="MeetingBoardMemberDTO" resultType="Integer">
+		SELECT COUNT(MBMNUM)
+		FROM MEETINGBOARD_MEMBER MBM
+		INNER JOIN MEETINGBOARD MB
+		ON(MBM.MEETINGBOARDNUM = MB.MEETINGBOARDNUM)
+		WHERE MBM.REQUESTMEMBERNUM = #{requestMemberNum} AND (MB.MEETINGBOARDDUEDATE - sysdate BETWEEN 0 AND 1)
+	</select>
+	
+	<select id="getSoonList" parameterType="MeetingBoardMemberDTO" resultMap="getSoonListResult">
+		SELECT MBM.MBMNUM, MBM.HOSTMEMBERNUM, MB.*, MBI.FILENUM, MBI.FILENAME
+		FROM MEETINGBOARD_MEMBER MBM
+		INNER JOIN MEETINGBOARD MB
+		ON(MBM.MEETINGBOARDNUM = MB.MEETINGBOARDNUM)
+		LEFT JOIN MEETINGBOARDIMAGE MBI
+		ON(MB.MEETINGBOARDNUM = MBI.MEETINGBOARDNUM)
+		WHERE MBM.REQUESTMEMBERNUM = #{requestMemberNum} AND (MB.MEETINGBOARDDUEDATE - sysdate BETWEEN 0 AND 1)
+		ORDER BY MB.MEETINGBOARDDUEDATE ASC
+	</select>
+	
+	<resultMap type="MeetingBoardMemberDTO" id="getSoonListResult">
+		<id column="MBMNUM" property="mbmNum"/>
+		<result column="HOSTMEMBERNUM" property="hostMemberNum"/>
+		
+		<association property="meetingBoardDTO" javaType="MeetingBoardDTO">
+			<id column="MEETINGBOARDNUM" property="meetingBoardNum"/>
+			<result column="MEETINGBOARDWRITER" property="meetingBoardWriter"/>
+			<result column="MEETINGBOARDTITLE" property="meetingBoardTitle"/>
+			<result column="MEETINGBOARDCONTENTS" property="meetingBoardContents"/>
+			<result column="MEETINGBOARDDUEDATE" property="meetingBoardDueDate"/>
+			<result column="MEETINGBOARDTOTALCOST" property="meetingBoardTotalCost"/>
+			<result column="MEETINGBOARDLOCATION" property="meetingBoardLocation"/>
+			<result column="MEETINGBOARDCURRENTMEMBER" property="meetingBoardCurrentMember"/>
+			<result column="MEETINGBOARDMAXMEMBER" property="meetingBoardMaxMember"/>
+			<result column="MEETINGBOARDCATEGORY" property="meetingBoardCategory"/>
+			<result column="MEETINGBOARDHOSTDEMAND" property="meetingBoardHostDemand"/>
+			
+			<association property="meetingBoardImageDTO" javaType="MeetingBoardImageDTO">
+				<id column="FILENUM" property="fileNum"/>
+				<result column="FILENAME" property="fileName"/>
+			</association>
+			
+		</association>
+		
+	</resultMap>
+
+</mapper>

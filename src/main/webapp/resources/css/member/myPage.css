@@ -1,0 +1,35 @@
+#main{
+    background-color: #FBF7F2;
+    height: 50rem;
+    margin-bottom: 25rem;
+}
+
+#modal{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.navnav{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#mainContent{
+    display: flex !important;
+    justify-content: center;
+}
+
+.table{
+    margin-top: 7rem;
+}
+
+#modal{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#buttons{
+    margin-top: 3rem;
+}
+
+
