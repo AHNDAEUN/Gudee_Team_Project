@@ -14,9 +14,15 @@ public class MainPager {
 		private boolean pre;
 		private boolean next;
 		
+		//검색어
+		private String search;
+		
+		//제목|카테고리
+		private String select;
+		
 		
 		public MainPager() {
-			this.perPage=4L;
+			this.perPage=8L;
 			this.perBlock=5L;
 		}
 		
@@ -143,6 +149,30 @@ public class MainPager {
 		public void setNext(boolean next) {
 			this.next = next;
 		}
+
+		public String getSearch() {
+			if(this.search==null) {
+				this.search="";
+			}
+			return search;
+		}
+
+		public void setSearch(String search) {
+			this.search = search;
+		}
+
+		public String getSelect() {
+			if(this.select==null) {
+				this.select="";
+			}
+			return select;
+		}
+
+		public void setSelect(String select) {
+			this.select = select;
+		}
+		
+		
 	
 }
 
