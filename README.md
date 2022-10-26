@@ -1,4 +1,4 @@
-![로고] 
+![로고] (src/main/webapp/resources/images/logo.png)
 
 # 중고거래와 모임 웹사이트 ***📦구디마켓🙋🏻‍♀️***
 
@@ -24,4 +24,4 @@
 ![Work Flow]()
 
 ## ERD
-![ERD]()
+![ERD](src/main/webapp/resources/images/Goodee_Market_Project.png)
