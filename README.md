@@ -1,6 +1,6 @@
-![로고] (src/main/webapp/resources/images/logo.png)
+![로고](src/main/webapp/resources/images/logo.png)
 
-# 중고거래와 모임 웹사이트 ***📦구디마켓🙋🏻‍♀️***
+# 중고거래와 모임 웹사이트 📦구디마켓🙋🏻‍♀️
 
 ## Features
 
