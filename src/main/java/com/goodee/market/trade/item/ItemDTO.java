@@ -33,6 +33,9 @@ public class ItemDTO{
 		this.itemNum = itemNum;
 	}
 	public Long getMemberNum() {
+		if(this.memberNum==null) {
+			this.memberNum=0L;
+		}
 		return memberNum;
 	}
 	public void setMemberNum(Long memberNum) {

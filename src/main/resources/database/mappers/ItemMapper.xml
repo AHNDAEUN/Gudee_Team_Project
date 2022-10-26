@@ -46,7 +46,13 @@
 		    (
 		        SELECT ROWNUM R, I.* FROM
 		            (SELECT * FROM ITEM 
-		            	<include refid="select"></include>
+		            	WHERE
+							<choose>
+								<when test="select == 'title'">ITEMTITLE</when>
+								<otherwise>ITEMCONTENTS</otherwise>
+							</choose>
+							LIKE '%' || #{search} || '%'
+		            		AND ITEMCATEGORY LIKE '%' || #{filter} || '%'
 		             ORDER BY ITEMNUM DESC) I
 		    )
 			WHERE R BETWEEN #{startRow} and #{lastRow}		 	
@@ -55,7 +61,7 @@
 
 		<!-- 찜 목록 -->
 		<select id="getHeartList" resultType="itemDTO" parameterType="itemDTO">
-		 	SELECT IM.NUM,I.ITEMTITLE,I.ITEMCONTENTS,I.ITEMCATEGORY,I.ITEMPRICE
+		 	SELECT *
             FROM ITEM I
             
             INNER JOIN

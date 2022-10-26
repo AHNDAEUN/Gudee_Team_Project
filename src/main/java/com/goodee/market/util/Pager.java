@@ -45,12 +45,12 @@ public class Pager {
 			}
 			
 			//2_1 totalPage보다 page가 더 클 경우
-			System.out.println(this.getPage());
-			System.out.println(totalPage);
+//			System.out.println(this.getPage());
+//			System.out.println(totalPage);
 			if(this.getPage()>totalPage) {
 				this.setPage(totalPage);
 			}
-			System.out.println(this.getPage());
+//			System.out.println(this.getPage());
 			
 			//3. totalPage로 totalBlock 구하기
 			Long totalBlock = totalPage/this.getPerBlock();
@@ -166,6 +166,9 @@ public class Pager {
 		}
 
 		public String getFilter() {
+			if(this.filter==null) {
+				this.filter="";
+			}
 			return filter;
 		}
 
@@ -186,6 +189,7 @@ public class Pager {
 		}
 
 
+		
 		
 	
 }
