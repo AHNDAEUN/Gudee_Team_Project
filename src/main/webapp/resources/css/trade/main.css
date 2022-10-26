@@ -17,6 +17,10 @@
     background-color: #7fad39;
 }
 
+.mainItemBody {
+	margin : 1rem 5rem;
+}
+
 #visual {
     /* overflow: hidden; */
     position: relative;

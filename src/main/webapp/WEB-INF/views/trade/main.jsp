@@ -67,30 +67,32 @@
     
     <!-- 인기 상품 -->
     <section class="main-item">
-    <div class="row">
-         <div class="item-text">
-             <a href="#" class="title-text">👍 인기 상품</a>
-             <h6 class="sub-text">다른 사람들은 이 상품을 보고 있어요!</h6>
-         </div>
-    </div>
-    <div class="item-row">                    
-        <c:forEach var="item" items="${list}">
-             <div class="col-lg-4 col-md-6 col-sm-6">
-                  <div class="product-item">
-                       <div class="featured-item-pic">
-                        	<c:forEach items="${dto.itemImageDTOs}" var="fileDTO" >
-                                <img alt="" src="../resources/upload/item/${fileDTO.fileName}">
-                            </c:forEach>
-                       </div>
-
-                       <div class="featured-item-text">
-                            <h6><a href="../trade/detail?num=${item.itemNum}" class="item-name">${item.itemTitle}</a></h6>
-                            <h5>${item.itemPrice}</h5>
-                       </div>
-                   </div>
-               </div>
-		</c:forEach>
-    </div>           
+    <div class="mainItemBody">
+	    <div class="row">
+	         <div class="item-text">
+	             <a href="#" class="title-text">👍 인기 상품</a>
+	             <h6 class="sub-text">다른 사람들은 이 상품을 보고 있어요!</h6>
+	         </div>
+	    </div>
+	    <div class="item-row">                    
+	        <c:forEach var="item" items="${list}">
+	             <div class="col-lg-4 col-md-6 col-sm-6">
+	                  <div class="product-item">
+	                       <div class="featured-item-pic">
+	                        	<c:forEach items="${dto.itemImageDTOs}" var="fileDTO" >
+	                                <img alt="" src="../resources/upload/item/${fileDTO.fileName}">
+	                            </c:forEach>
+	                       </div>
+	
+	                       <div class="featured-item-text">
+	                            <h6><a href="../trade/detail?num=${item.itemNum}" class="item-name">${item.itemTitle}</a></h6>
+	                            <h5>${item.itemPrice}</h5>
+	                       </div>
+	                   </div>
+	               </div>
+			</c:forEach>
+	    </div>    
+	</div>	           
    </section>
     
 	<c:import url="../template/trade/footer.jsp"></c:import>
