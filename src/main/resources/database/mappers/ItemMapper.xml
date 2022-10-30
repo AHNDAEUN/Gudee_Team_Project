@@ -65,16 +65,14 @@
 		<!-- 찜 목록 -->
 		<select id="getHeartList" resultType="itemDTO" parameterType="itemDTO">
 		 	SELECT *
-            FROM ITEM I
-            
-            INNER JOIN
-            	ITEMLIKE_MEMBER IM
-            ON I.ITEMNUM= IM.ITEMNUM
-            
-            INNER JOIN
-            	MEMBER M
-            ON M.MEMBERNUM= IM.MEMBERNUM
-            
+	            FROM ITEM I, ITEMIMAGE IM
+		            INNER JOIN
+		            	ITEMLIKE_MEMBER IM
+		            ON I.ITEMNUM= IM.ITEMNUM
+		            
+		            INNER JOIN
+		            	MEMBER M
+		            ON M.MEMBERNUM= IM.MEMBERNUM
             WHERE M.MEMBERNUM=#{memberNum} 	
 		</select>
 
