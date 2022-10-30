@@ -1,6 +1,8 @@
 package com.goodee.market.trade.item;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -33,8 +35,53 @@ public class ItemController{
 //		
 //		
 //		return "redirect:./trade/mypage";
-//	}
+//	}	
+	
 //	
+	//--------------------- Comment --------------------------
+	
+//		@PostMapping("commentUpdate")
+//		@ResponseBody
+//		public int setCommentUpdate(ItemCommentDTO itemCommentDTO)throws Exception{
+//			int result = 
+//			return result;
+//		}
+//		
+//		@PostMapping("commentDelete")
+//		@ResponseBody
+//		public int setCommentDelete(BankBookCommentDTO bankBookCommentDTO)throws Exception{
+//			int result = bankBookService.setCommentDelete(bankBookCommentDTO);
+//			return result;
+//		}
+//		
+//	
+//		
+//		@GetMapping("commentList")
+//		@ResponseBody
+//		public Map<String, Object> getcommentList(CommentPager commentPager)throws Exception{
+//			List<BankBookCommentDTO> ar = bankBookService.getCommentList(commentPager);
+//			System.out.println("CommentList");
+//			System.out.println(ar.size());
+//			
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("list", ar);
+//			map.put("pager", commentPager);
+//			
+//			return map;
+//			
+//		}
+		
+	
+	@PostMapping("commentAdd")
+	@ResponseBody
+	public String setCommentAdd(ItemCommentDTO itemCommentDTO)throws Exception {
+		int result = itemService.setCommentAdd(itemCommentDTO);
+		if(result == 0) {
+			System.out.println("댓글 작성 실패");
+		}
+		String jsonResult="{\"result\":\""+result+"\"}";
+		return jsonResult;
+	}
 	
 	@PostMapping("fileDelete")
 	@ResponseBody
@@ -59,8 +106,9 @@ public class ItemController{
 	
 	//카테고리 메인
 	@GetMapping(value = "category")
-	public ModelAndView getList(Pager pager)throws Exception {
+	public ModelAndView getList(Pager pager, ItemImageDTO itemImageDTO)throws Exception {
 		System.out.println("category");
+		System.out.println("Filename:"+itemImageDTO.getFileName());
 		
 		ModelAndView mv = new ModelAndView();
 		List<ItemDTO> ar =itemService.getList(pager);

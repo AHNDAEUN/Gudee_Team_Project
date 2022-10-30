@@ -68,9 +68,6 @@
           </div>
         </div>  
 
-<!-- //////////////////////////////////////////////////////////////////////////////////////// -->
-
-
 
 
 <div class="sub_container">
@@ -105,17 +102,6 @@
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
-
-
-
-			<!-- <img id="it_img_m" src="/resources/upload/item/KakaoTalk_2011.jpg">
-
-			    <ul class="it_img_thumb">
-						<li><img src="/resources/upload/item/KakaoTalk_2011.jpg" class="it_img_s it_img_s_on"></li>
-                   
-
-						
-				</ul>  -->
         
 
 
@@ -196,7 +182,7 @@
 
 
 
-<!-- 
+
             <div class="item_detail">
                 <div class="item_wrap">
             
@@ -209,19 +195,32 @@
                 <div id="tab1" class="tab-cont">
                 
                     <!-- comment -->
+                    <!-- list 출력 -->
+                  <div >
 
-                    <!-- <div class="mb-3">
+                    <table id="commentList" class="table table-danger">
+			
+
+                    </table>
+
+
+                  </div>
+
+                <!--comment 작성  -->
+                  <div class="row">
+                     <div class="mb-3">
                         <label for="writer" class="form-label">사용자이름</label>
-                        <input type="text" name="memberNum"  class="form-control" id="writer" >
+                        <input type="text" name="writer"  class="form-control" id="writer" >
                       </div>
                       <div class="mb-3">
                         <label for="contents" class="form-label">댓글</label>
-                        <textarea class="form-control" id="contents" rows="3"></textarea>
+                        <textarea class="form-control" name="contents" id="contents" rows="3"></textarea>
                       </div>
 
                         <div class="mb-3">
-                          <button type="submit" class="btn btn-primary mb-3">댓글 등록</button>
+                          <button type="submit" class="btn btn-primary mb-3" id="commentAdd" data-comment-num="${dto.itemNum}">댓글 등록</button>
                         </div>
+                      </div>
                       
                      <!-- comment -->
 
@@ -229,7 +228,7 @@
             </div> 
 
 
-    <!-- <div id="tab2" class="tab-cont">
+    <div id="tab2" class="tab-cont">
    
 
             <div class="cpa">
@@ -247,9 +246,10 @@
     </div>
 	
     <br><br><br>
-</div>  -->
+</div>  
 
 <script src="../../../resources/js/itemdetail.js"></script>
+<script src="../../../resources/js/itemcomment.js"></script>
 <c:import url="../template/trade/footer.jsp"></c:import>
 
 </body>

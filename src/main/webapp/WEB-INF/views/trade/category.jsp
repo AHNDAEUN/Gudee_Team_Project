@@ -78,11 +78,12 @@
                     <c:forEach var="item" items="${list}">
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product-item">
+
                                 <div class="featured-item-pic">
-                                	<c:forEach items="${dto.itemImageDTOs}" var="fileDTO" >
-                                		<img alt="" src="../resources/upload/item/${fileDTO.fileName}">
-                                	</c:forEach>
-                                </div>
+                                	 <c:forEach items="${item.itemImageDTOs}" var="fileDTO" > 
+                                        <img alt="" src="../resources/upload/item/${item.itemImageDTOs[0].fileName}">
+
+                                	 </c:forEach> 
 
                                 <div class="featured-item-text">
                                     <h6><a href="../trade/detail?num=${item.itemNum}" class="item-name">${item.itemTitle}</a></h6>

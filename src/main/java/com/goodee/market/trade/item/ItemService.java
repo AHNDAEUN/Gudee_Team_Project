@@ -22,9 +22,16 @@ public class ItemService{
 	private ItemDAO itemDAO;
 	
 	@Autowired
+	private ItemCommentDAO itemCommentDAO;
+	
+	@Autowired
 	private FileManager fileManager;
 	
 
+	public int setCommentAdd(ItemCommentDTO itemCommentDTO)throws Exception {
+		
+	return itemCommentDAO.setCommentAdd(itemCommentDTO);
+	} 
 	
 	public int setFileDelete(ItemImageDTO itemImageDTO, ServletContext servletContext)throws Exception{
 		 itemImageDTO = itemDAO.getFileDetail(itemImageDTO);
