@@ -28,20 +28,23 @@
     DELETE ITEMIMAGE WHERE FILENUM= #{fileNum}
     
     </delete>
+    
     	<!-- 메인 -->
     	<select id="getTradeMain" resultType="itemDTO" parameterType="Pager">
-    		SELECT * FROM
-		    (
-		        SELECT ROWNUM R, I.* FROM
-		            (SELECT * FROM ITEM 
-		            	<include refid="select"></include>
-		             ORDER BY ITEMNUM DESC) I
-		    )
-			WHERE R BETWEEN #{startRow} and #{lastRow}
+			SELECT IT.* FROM
+					    (SELECT ROWNUM R, IT.* FROM
+					            (SELECT * FROM ITEM I
+			                        left join
+			                        itemimage IM
+			                        on I.ITEMNUM = IM.ITEMNUM
+					            	<include refid="select"></include>
+			                    ) IT
+					    ) IT
+			    WHERE R BETWEEN #{startRow} and #{lastRow}
     	</select>
     
     	<!-- 카테고리 메인 -->
- 		<select id="getList" resultType="itemDTO" parameterType="Pager">
+ 		<select id="getList" parameterType="Pager" resultMap="getDetailResult">
 		 	SELECT * FROM
 		    (
 		        SELECT ROWNUM R, I.* FROM

@@ -56,7 +56,7 @@ public class ItemController{
 		mv.setViewName("trade/main");
 		return mv;
 	}
-	
+
 	
 	//카테고리 메인
 	@GetMapping(value = "category")
