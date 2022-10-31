@@ -44,6 +44,7 @@
 		
     	<!-- 카테고리 메인 -->
  		<select id="getList" resultType="itemDTO" parameterType="Pager">
+				
 				 SELECT ITEM.*, IM.*
 		         FROM
 				 (SELECT * FROM

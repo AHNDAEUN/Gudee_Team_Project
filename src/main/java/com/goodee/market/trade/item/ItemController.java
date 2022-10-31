@@ -40,45 +40,44 @@ public class ItemController{
 //	
 	//--------------------- Comment --------------------------
 	
-//		@PostMapping("commentUpdate")
-//		@ResponseBody
-//		public int setCommentUpdate(ItemCommentDTO itemCommentDTO)throws Exception{
-//			int result = 
-//			return result;
-//		}
-//		
-//		@PostMapping("commentDelete")
-//		@ResponseBody
-//		public int setCommentDelete(BankBookCommentDTO bankBookCommentDTO)throws Exception{
-//			int result = bankBookService.setCommentDelete(bankBookCommentDTO);
-//			return result;
-//		}
-//		
-//	
-//		
-//		@GetMapping("commentList")
-//		@ResponseBody
-//		public Map<String, Object> getcommentList(CommentPager commentPager)throws Exception{
-//			List<BankBookCommentDTO> ar = bankBookService.getCommentList(commentPager);
+		@PostMapping("commentUpdate")
+		@ResponseBody
+		public int setCommentUpdate(ItemCommentDTO itemCommentDTO)throws Exception{
+			int result = itemService.setCommentUpdate(itemCommentDTO);
+			return result;
+		}
+		
+		@PostMapping("commentDelete")
+		@ResponseBody
+		public int setCommentDelete(ItemCommentDTO itemCommentDTO)throws Exception{
+			int result = itemService.setCommentDelete(itemCommentDTO);
+			return result;
+		}
+		
+		
+		@GetMapping("commentList")
+		@ResponseBody
+		public Map<String, Object> getcommentList(ItemCommentPager itemCommentPager)throws Exception{
+			List<ItemCommentDTO> ar = itemService.getCommentList(itemCommentPager);
 //			System.out.println("CommentList");
-//			System.out.println(ar.size());
-//			
-//			Map<String, Object> map = new HashMap<String, Object>();
-//			map.put("list", ar);
-//			map.put("pager", commentPager);
-//			
-//			return map;
-//			
-//		}
+//			System.out.println(ar.size());			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("list", ar);
+			map.put("pager", itemCommentPager);
+			
+			return map;
+			
+		}
 		
 	
 	@PostMapping("commentAdd")
 	@ResponseBody
 	public String setCommentAdd(ItemCommentDTO itemCommentDTO)throws Exception {
 		int result = itemService.setCommentAdd(itemCommentDTO);
-		if(result == 0) {
-			System.out.println("댓글 작성 실패");
-		}
+		System.out.println(itemCommentDTO.getItemNum());
+		System.out.println(itemCommentDTO.getWriter());
+		System.out.println(itemCommentDTO.getContents());
+		
 		String jsonResult="{\"result\":\""+result+"\"}";
 		return jsonResult;
 	}

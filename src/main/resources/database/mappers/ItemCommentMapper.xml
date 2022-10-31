@@ -6,13 +6,34 @@
  <mapper namespace="com.goodee.market.trade.item.ItemCommentDAO">
     
     
+    <update id="setCommentUpdate" parameterType="ItemCommentDTO" >
+		UPDATE ITEMCOMMENT SET CONTENTS=#{contents} WHERE NUM=#{num}
+	</update>
+
+
+	<delete id="setCommentDelete" parameterType="ItemCommentDTO">
+		DELETE ITEMCOMMENT WHERE num=#{num} 
+	</delete>
+
+	
+	<select id="getCommentListTotalCount" parameterType="CommentPager" resultType="Long">
+		SELECT COUNT(NUM) FROM ITEMCOMMENT WHERE BOOKNUM=#{bookNum}
+	</select>
+
     <insert id="setCommentAdd" parameterType="ItemCommentDTO">
-     INSERT INTO ITEMCOMMENT VALUES (ITEM_SEQ.NEXTVAL, #{#itemNum}, #{writer},#{contents}, sysdate)
+     INSERT INTO ITEMCOMMENT VALUES (ITEM_SEQ.NEXTVAL, #{itemNum}, #{writer},#{contents}, sysdate)
     </insert>
     
+    <select id="getCommentList" parameterType="ItemCommentPager" resultType="ItemCommentDTO"> 
     
+    SELECT * FROM
+    ( SELECT ROWNUM R,IC.* FROM
+    (SELECT * FROM ITEMCOMMENT WHERE ITEMNUM=#{itemNum}
+    ORDER BY NUM DESC)IC)
+    WHERE R BETWEEN #{startRow} and #{lastRow}
+    </select>
     
-    
+   
     </mapper>
     
     
