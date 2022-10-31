@@ -22,9 +22,47 @@ public class ItemService{
 	private ItemDAO itemDAO;
 	
 	@Autowired
+	private ItemCommentDAO itemCommentDAO;
+	
+	@Autowired
 	private FileManager fileManager;
 	
+	
+	
+	//---------------------modal----------------------------------
+	
 
+	
+	
+	//-----------------------comment-------------------------------
+
+	public int setCommentUpdate(ItemCommentDTO itemCommentDTO)throws Exception{
+		return itemCommentDAO.setCommentUpdate(itemCommentDTO);
+	}
+	
+	
+	public int setCommentDelete(ItemCommentDTO itemCommentDTO)throws Exception{
+		return itemCommentDAO.setCommentDelete(itemCommentDTO);
+	}
+	
+	public List<ItemCommentDTO> getCommentList(ItemCommentPager itemcommentPager)throws Exception{
+		itemcommentPager.getRowNum();
+		Long totalCount = itemCommentDAO.getCommentListTotalCount(itemcommentPager);
+		itemcommentPager.makePage(totalCount);
+		return itemCommentDAO.getCommentList(itemcommentPager);
+	}
+	
+
+	public int setCommentAdd(ItemCommentDTO itemCommentDTO)throws Exception {
+		
+	return itemCommentDAO.setCommentAdd(itemCommentDTO);
+	} 
+	
+	
+	
+	//-----------------------file-------------------------------
+	
+	
 	
 	public int setFileDelete(ItemImageDTO itemImageDTO, ServletContext servletContext)throws Exception{
 		 itemImageDTO = itemDAO.getFileDetail(itemImageDTO);

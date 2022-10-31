@@ -1,6 +1,8 @@
 package com.goodee.market.trade.item;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -34,8 +36,52 @@ public class ItemController{
 //		
 //		
 //		return "redirect:./trade/mypage";
-//	}
+//	}	
+	
 //	
+	//--------------------- Comment --------------------------
+	
+		@PostMapping("commentUpdate")
+		@ResponseBody
+		public int setCommentUpdate(ItemCommentDTO itemCommentDTO)throws Exception{
+			int result = itemService.setCommentUpdate(itemCommentDTO);
+			return result;
+		}
+		
+		@PostMapping("commentDelete")
+		@ResponseBody
+		public int setCommentDelete(ItemCommentDTO itemCommentDTO)throws Exception{
+			int result = itemService.setCommentDelete(itemCommentDTO);
+			return result;
+		}
+		
+		
+		@GetMapping("commentList")
+		@ResponseBody
+		public Map<String, Object> getcommentList(ItemCommentPager itemCommentPager)throws Exception{
+			List<ItemCommentDTO> ar = itemService.getCommentList(itemCommentPager);
+//			System.out.println("CommentList");
+//			System.out.println(ar.size());			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("list", ar);
+			map.put("pager", itemCommentPager);
+			
+			return map;
+			
+		}
+		
+	
+	@PostMapping("commentAdd")
+	@ResponseBody
+	public String setCommentAdd(ItemCommentDTO itemCommentDTO)throws Exception {
+		int result = itemService.setCommentAdd(itemCommentDTO);
+		System.out.println(itemCommentDTO.getItemNum());
+		System.out.println(itemCommentDTO.getWriter());
+		System.out.println(itemCommentDTO.getContents());
+		
+		String jsonResult="{\"result\":\""+result+"\"}";
+		return jsonResult;
+	}
 	
 	@PostMapping("fileDelete")
 	@ResponseBody
@@ -60,9 +106,10 @@ public class ItemController{
 	
 	//카테고리 메인
 	@GetMapping(value = "category")
-	public void getList(@RequestParam(value = "filter", required = false) String filter, Pager pager)throws Exception {
+
+	public ModelAndView getList(Pager pager, ItemImageDTO itemImageDTO)throws Exception {
 		System.out.println("category");
-		System.out.println(filter);
+		System.out.println("Filename:"+itemImageDTO.getFileName());
 		
 		ModelAndView mv = new ModelAndView();
 		List<ItemDTO> ar =itemService.getList(pager);

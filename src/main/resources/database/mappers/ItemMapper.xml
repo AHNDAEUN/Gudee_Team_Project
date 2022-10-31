@@ -2,9 +2,8 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    <mapper namespace="com.goodee.market.trade.item.ItemDAO">
-    
-    
+   
+     <mapper namespace="com.goodee.market.trade.item.ItemDAO">
     
      <sql id="select">
 		WHERE
@@ -12,8 +11,11 @@
 				<when test="select == 'title'">ITEMTITLE</when>
 				<otherwise>ITEMCONTENTS</otherwise>
 			</choose>
-		LIKE '%' || #{search} || '%'
-	</sql>    
+
+		LIKE '%'||#{select}||'%'
+	</sql>
+  
+
     
 	<select id="getFileDetail" resultType="ItemImageDTO" parameterType="ItemImageDTO">
 		SELECT * FROM ITEMIMAGE WHERE FILENUM=#{fileNum}
@@ -42,25 +44,33 @@
 					    ) IT
 			    WHERE R BETWEEN #{startRow} and #{lastRow}
     	</select>
-    
-    	<!-- 카테고리 메인 -->
- 		<select id="getList" parameterType="Pager" resultMap="getDetailResult">
-		 	SELECT * FROM
-		    (
-		        SELECT ROWNUM R, I.* FROM
-		            (SELECT * FROM ITEM 
-		            	WHERE
-							<choose>
-								<when test="select == 'title'">ITEMTITLE</when>
-								<otherwise>ITEMCONTENTS</otherwise>
-							</choose>
-							LIKE '%' || #{search} || '%'
-		            		AND ITEMCATEGORY LIKE '%' || #{filter} || '%'
-		             ORDER BY ITEMNUM DESC) I
-		    )
-			WHERE R BETWEEN #{startRow} and #{lastRow}		 	
-		</select>
+    	
+  
 		
+		
+    	<!-- 카테고리 메인 -->
+
+ 		<select id="getList" resultType="itemDTO" parameterType="Pager">
+				
+				 SELECT ITEM.*, IM.*
+		         FROM
+				 (SELECT * FROM
+				 ( SELECT ROWNUM R, I.* FROM
+				 (SELECT * FROM ITEM 
+				 <include refid="select"></include>
+				            
+				 ORDER BY ITEMNUM DESC)I
+				 )
+				 WHERE R BETWEEN #{startRow} and #{lastRow}	
+					
+		         ) ITEM
+			     INNER JOIN
+			     ITEMIMAGE IM
+			     ON ITEM.ITEMNUM = IM.ITEMNUM
+			     ORDER BY ITEM.ITEMNUM DESC, IM.FILENUM ASC
+				 	
+
+		</select>
 
 		<!-- 찜 목록 -->
 		<select id="getHeartList" resultType="itemDTO" parameterType="itemDTO">
