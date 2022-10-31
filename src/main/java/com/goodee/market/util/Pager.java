@@ -14,9 +14,11 @@ public class Pager {
 		private boolean pre;
 		private boolean next;
 		
+	
 		//검색어
 		private String search;
 		
+		//제목|카테고리
 		private String select;
 
 		//정렬
@@ -43,12 +45,12 @@ public class Pager {
 			}
 			
 			//2_1 totalPage보다 page가 더 클 경우
-			System.out.println(this.getPage());
-			System.out.println(totalPage);
+//			System.out.println(this.getPage());
+//			System.out.println(totalPage);
 			if(this.getPage()>totalPage) {
 				this.setPage(totalPage);
 			}
-			System.out.println(this.getPage());
+//			System.out.println(this.getPage());
 			
 			//3. totalPage로 totalBlock 구하기
 			Long totalBlock = totalPage/this.getPerBlock();
@@ -153,6 +155,9 @@ public class Pager {
 		}
 
 		public String getSearch() {
+			if(this.search==null) {
+				this.search="";
+			}
 			return search;
 		}
 
@@ -161,6 +166,9 @@ public class Pager {
 		}
 
 		public String getFilter() {
+			if(this.filter==null) {
+				this.filter="";
+			}
 			return filter;
 		}
 
@@ -179,6 +187,10 @@ public class Pager {
 		public void setSelect(String select) {
 			this.select = select;
 		}
+
+
+		
+		
 	
 }
 

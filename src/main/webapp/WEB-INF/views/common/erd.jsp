@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="/resources/css/trade/footer.css" />
     <link rel="stylesheet" href="/resources/css/common.css" />
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <c:import url="../template/trade/header.jsp"></c:import>
@@ -47,28 +48,33 @@
 		
 
 				<div class="erdair"></div>
-				<!-- TRADE ERD -->
-				<div class="erd-row-con">
-					<div class="erdcon">
-						<h5 class="erdtitle">구디 마켓 │ 중고거래📦 ERD</h5>
-						<img alt="" src="/resources/images/Goodee_Market_Project_trade.png" class="erd-img">
+				
+				<div class="erd-row-con-two">
+					<!-- TRADE ERD -->
+					<div class="erd-row-Trade-logo"> <!-- 상단 -->
+						<h1>📦</h1>
+					</div>
+					<div class="erdTrade"> <!-- 하단 -->
+						<div class="erd-row-con">
+							<div class="erdTradeCon">
+								<h5 class="erdtitle">구디 마켓 │ 중고거래📦 ERD</h5>
+								<img alt="" src="/resources/images/Goodee_Market_Project_trade.png" class="erd-img">
+							</div>
+						</div>					
 					</div>
 					
-					<div class="erd-tec">
+					<!-- Meeting ERD -->
+					<div class="erd-row-Meet-logo">
+						<h1>👥</h1>
 					</div>
-				</div>
-				
-				
-				<div class="erdair"></div>
-				<!-- Meeting ERD -->
-				<div class="erd-row-con">
-					<div class="erdcon">
-						<h5 class="erdtitle">구디 마켓 │ 모임👥 ERD</h5>
-						<img alt="" src="/resources/images/Goodee_Market_Project_meeting.png" class="erd-img">
-					</div>
-					
-					<div class="erd-tec">
-					</div>
+					<div class="erdMeeting">
+						<div class="erd-row-con">
+							<div class="erdcon">
+								<h5 class="erdtitle">구디 마켓 │ 모임👥 ERD</h5>
+								<img alt="" src="/resources/images/Goodee_Market_Project_meeting.png" class="erd-img">
+							</div>
+						</div>				
+					</div>					
 				</div>
 			</div>
 		</div>
@@ -77,5 +83,6 @@
 			
 
 	<c:import url="../template/trade/footer.jsp"></c:import>
+	<script src="../../../resources/js/trade/erd.js"></script>
 </body>
 </html>

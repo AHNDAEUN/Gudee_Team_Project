@@ -48,6 +48,13 @@
     margin-top: 2rem;
 }
 
+.erd-row-con-two {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
 .erdtitle {
     font-weight: bold;
     position: relative;

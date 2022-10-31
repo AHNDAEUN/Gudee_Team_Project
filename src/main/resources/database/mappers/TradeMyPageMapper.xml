@@ -7,21 +7,24 @@
 
 	<!-- 판매리스트 -->
 	<select id="getSellItemList" resultType="ItemDTO" parameterType="ItemDTO">	
-		SELECT I.ITEMTITLE, I.ITEMPRICE, M.MEMBERNICKNAME
-		FROM ITEM I
-             INNER JOIN
-             ITEMLIKE_MEMBER IM
-             ON I.ITEMNUM= IM.ITEMNUM
-             
-             INNER JOIN
-             MEMBER M
-             ON M.MEMBERNUM= IM.MEMBERNUM
-             WHERE M.MEMBERNUM=#{memberNum};
+<!-- 		SELECT I.ITEMTITLE, I.ITEMPRICE, M.MEMBERNICKNAME
+			FROM ITEM I
+	             INNER JOIN
+	             ITEMLIKE_MEMBER IM
+	             ON I.ITEMNUM= IM.ITEMNUM
+	             
+	             INNER JOIN
+	             MEMBER M
+	             ON M.MEMBERNUM= IM.MEMBERNUM
+            WHERE M.MEMBERNUM=#{memberNum}; -->
+            SELECT * FROM ITEM
+		    WHERE ITEMNUM
+		        =(SELECT ITEMNUM FROM SELLITEMLIST WHERE MEMBERNUM=#{memberNum})
 	</select>
 	
 	
 	<!-- 구매리스트 -->
-	<select id="getBuyItemList" resultType="ItemDTO" parameterType="BuyerDTO">
+	<select id="getBuyItemList" resultType="ItemDTO" parameterType="ItemDTO">
 		SELECT * FROM ITEM
 		    WHERE ITEMNUM
 		        =(SELECT ITEMNUM FROM BUYITEMLIST WHERE MEMBERNUM=#{memberNum})
