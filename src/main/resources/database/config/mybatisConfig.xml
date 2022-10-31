@@ -14,7 +14,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.goodee.market.trade.item.ItemCommentDTO" alias="ItemCommentDTO"/>
 		<typeAlias type="com.goodee.market.trade.item.ItemCommentPager" alias="ItemCommentPager"/>
 		<typeAlias type="com.goodee.market.trade.item.like.ItemLike_MemberDTO" alias="ItemLike_MemberDTO"/>
-		<typeAlias type="com.goodee.market.trade.buyer.BuyerDTO" alias="BuyerDTO"/>
 		<typeAlias type="com.goodee.market.trade.sellItemList.SellItemListDTO" alias="SellItemListDTO"/>
 		<typeAlias type="com.goodee.market.trade.buyItemList.BuyItemListDTO" alias="BuyItemListDTO"/>
 		<typeAlias type="com.goodee.market.trade.review.ReviewDTO" alias="ReviewDTO"/>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -101,10 +102,11 @@ public class ItemController{
 		mv.setViewName("trade/main");
 		return mv;
 	}
-	
+
 	
 	//카테고리 메인
 	@GetMapping(value = "category")
+
 	public ModelAndView getList(Pager pager, ItemImageDTO itemImageDTO)throws Exception {
 		System.out.println("category");
 		System.out.println("Filename:"+itemImageDTO.getFileName());
@@ -115,7 +117,7 @@ public class ItemController{
 		mv.addObject("pager", pager);
 		
 		mv.setViewName("trade/category");
-		return mv;
+		
 	}
 	
 	

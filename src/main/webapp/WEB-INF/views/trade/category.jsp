@@ -44,13 +44,13 @@
                         <div class="sidebar-cate">
                             <h4 class="sidebar-cate-title">전체 카테고리</h4>
                             <ul class="scate-ul">
-                            	<li class="scate-li"><a href="/trade/category" class="scate-a">의류</a></li>
-	                            <li class="scate-li"><a href="/trade/category" class="scate-a">식품류</a></li>
-	                            <li class="scate-li"><a href="/trade/category" class="scate-a">도서/문구</a></li>
-	                            <li class="scate-li"><a href="/trade/category" class="scate-a">뷰티/미용</a></li>
-	                            <li class="scate-li"><a href="/trade/category" class="scate-a">생활/디지털</a></li>
-	                            <li class="scate-li"><a href="/trade/category" class="scate-a">반려동물 용품</a></li>
-	                            <li class="scate-li"><a href="/trade/category" class="scate-a">가구/인테리어</a></li>							
+                            	<li class="scate-li"><a href="/trade/category?&page=${i}&filter=의류&select=${pager.select}&search=${pager.search}" class="scate-a">의류</a></li>
+	                            <li class="scate-li"><a href="/trade/category?&page=${i}&filter=식품류&select=${pager.select}&search=${pager.search}" class="scate-a">식품류</a></li>
+	                            <li class="scate-li"><a href="/trade/category?&page=${i}&filter=도서/문구&select=${pager.select}&search=${pager.search}" class="scate-a">도서/문구</a></li>
+	                            <li class="scate-li"><a href="/trade/category?&page=${i}&filter=뷰티/미용&select=${pager.select}&search=${pager.search}" class="scate-a">뷰티/미용</a></li>
+	                            <li class="scate-li"><a href="/trade/category?&page=${i}&filter=생활/디지털&select=${pager.select}&search=${pager.search}" class="scate-a">생활/디지털</a></li>
+	                            <li class="scate-li"><a href="/trade/category?&page=${i}&filter=반려동물용품&select=${pager.select}&search=${pager.search}" class="scate-a">반려동물 용품</a></li>
+	                            <li class="scate-li"><a href="/trade/category?&page=${i}&filter=가구/인테리어&select=${pager.select}&search=${pager.search}" class="scate-a">가구/인테리어</a></li>							
                             </ul>
                         </div>
                     </div>                    
@@ -104,17 +104,17 @@
                                     <nav aria-label="Page navigation category">
                                         <ul class="pagination">
 	                                        <li class="page-item ${pager.pre ? '' : 'disabled' }">
-										  		<a class="page-link" href="./list?page=${pager.startNum - 1 }&filter=${pager.filter}&search=${pager.search}" aria-label="Previous">
+										  		<a class="page-link" href="./list?page=${pager.startNum - 1 }&filter=${pager.filter}&select=${pager.select}&search=${pager.search}" aria-label="Previous">
 												   <span aria-hidden="true">&laquo;</span>
 												</a>
 										  	</li>
                                             <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
                                                 <li class="page-item">
-                                                    <a class="page-link" href="./category?page=${i}&filter=${pager.filter}&search=${pager.search}">${i}</a>
+                                                    <a class="page-link" href="./category?page=${i}&filter=${pager.filter}&select=${pager.select}&search=${pager.search}">${i}</a>
                                                 </li>
                                             </c:forEach>
                                             <li class="page-item ${pager.next ? '' : 'disabled' }">
-											   <a class="page-link" href="./category?page=${pager.lastNum + 1 }&filter=${pager.filter}&search=${pager.search}" aria-label="Next">
+											   <a class="page-link" href="./category?page=${pager.lastNum + 1 }&filter=${pager.filter}&select=${pager.select}&search=${pager.search}" aria-label="Next">
 											      <span aria-hidden="true">&raquo;</span>
 											   </a>
 											</li>
